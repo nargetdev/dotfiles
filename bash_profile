@@ -1,7 +1,8 @@
 source ~/.bashrc
 
 #Add git branch to status line:
-#git clone git@github.com:jimeh/git-aware-prompt.git
+#mkdir ~/.bash
+#git clone git@github.com:jimeh/git-aware-prompt.git ~/.bash/git-aware-prompt
 export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
 export PS1="\u@\h \w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "
