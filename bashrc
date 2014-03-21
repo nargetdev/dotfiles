@@ -1,107 +1,121 @@
-alias tmux="TERM=screen-256color-bce tmux"
-#pathogen install
-howtotar()
+#{{{alias
+alias tls='tmux ls'
+alias tmux='tmux -2'
+alias cdm='cd ~/eecs/281market'
+alias cdv='cd ~/.vim/bundle'
+alias BB='source ~/.bashrc'
+alias vN='vim ~/.bash_profile'
+alias vB='vim ~/.bash_profile'
+
+alias vB='vim ~/.bashrc'
+alias vV='vim ~/.vimrc'
+alias v='vim'
+alias autocaen='osascript /Users/nateargetsinger/Dev/OSAS/acaen.scpt'
+alias auto='autocaen &'
+
+alias play='afplay -q 1'
+alias vim='~/vim'
+#}}}
+#{{{Function Section
+attach()
 {
-	echo "$ tar -xvfz <name of tarball with .tar.gz extension>"
-	echo "$ tar -xvfj <name of tarball with tar.bz2 extension>"
-}
-configure_pyclewn()
-{
-	vimdir=$HOME/.vim/bundle python setup.py install --force --home=$HOME
-}
-uninstall_pyclewn()
-{
-	vimdir=$HOME/.vim/bundle python setup.py install --force --home=$HOME --record files.txt;
-	rm $(cat files.txt)
-}
-configure_vim()
-{
-	./configure --enable-pythoninterp --with-features=huge --prefix=$HOME/opt/vim
-	make && make install
-	mkdir -p $HOME/bin
-	cd $HOME/bin
-	ln -s $HOME/opt/vim/bin/vim
-	which vim
-	vim --version
-}
-#B;;B;;B;;B;;B;;B;;B;;B;;B;;B;;B;;B;;B;;
-tarball()
-{
-	tar -czf submit.tar.gz *
-}
-untar()
-{
-	tar xvzf $1
-}
-buntar()
-{
-	tar xvjf $1
-}
-myoutput()
-{
-	one > my1.txt;
-	sleep .5
-	echo "one"
-	two > my2.txt;
-	sleep .5
-	echo "two"
-	three > my3.txt;
-	sleep .5
-	echo "three"
-	four > my4.txt;
+	tmux attach-session -t $1
 }
 
+#for example, this shell command will set the window to 100x50 characters:
+#printf '\e[8;50;100t'
 
-#alias one='./rotld -d -c POOR_MAN -a NORMAL -v 10 1.txt'
-#alias two='./rotld -d -c POOR_MAN -a NORMAL -v 10 2.txt'
-#alias three='./rotld -d -c POOR_MAN -a NORMAL -v 10 3.txt'
-#alias four='./rotld -c -a POOR_MAN -v 10 4.txt'
+#Minimize the window for a few seconds, then restore it:
 
-#alias one='./rotld -d -c BINARY -a NORMAL -v 10 1.txt'
-#alias two='./rotld -d -c BINARY -a NORMAL -v 10 2.txt'
-#alias three='./rotld -d -c BINARY -a NORMAL -v 10 3.txt'
-#alias four='./rotld -c -a BINARY -v 10 4.txt'
+#printf '\e[2t' && sleep 3 && printf '\e[1t'
+#Move the window to the top/left corner of the display:
 
-alias one='./rotld -d -c SORTED -a NORMAL -v 10 1.txt'
-alias two='./rotld -d -c SORTED -a NORMAL -v 10 2.txt'
-alias three='./rotld -d -c SORTED -a NORMAL -v 10 3.txt'
-alias four='./rotld -c -a SORTED -v 10 4.txt'
-
-alias large='./rotld -c SORTED -a NORMAL -v 10 sample-input-2.txt'
-alias largeP='./rotld -c POOR_MAN -a NORMAL -v 10 sample-input-2.txt'
-alias dP='./rotld -c BINARY -a NORMAL -v 10 -d  sample-input-2.txt > d.txt'
-
-alias BB='source ~/.bash_profile'
-alias dcomp='diff d.txt sample-debug-output-2.txt'
-alias comp='diff out.txt sample-output-2.txt'
-alias norotate='xrandr -o normal'
-alias rotate='xrandr -o left'
-alias cdm='cd ~/e/p3'
-
-remake()
+#printf '\e[3;0;0t'
+left()
 {
-	make clean;
-	make debug;
-}
-#if [ -f ~/.bashrc ]; then
-#	.~/.bashrc
-#PS1='\[\033[0;31m\]\u\[\033[0;33m\]\!\[\033[0;32m\]\w\[\033[m\] '
-#PS1='\[\033[0;35m\]CAEN\[\033[0;33m\]\!\[\033[0;32m\]\w\[\033[m\] '
-alias tappD='./rotld -c POOR_MAN -a NORMAL -v 10 -d test-11-PAIRING-LIGHT.txt'
-alias tappS='./rotld -c SORTED   -a NORMAL -v 10 -d test-11-PAIRING-LIGHT.txt'
-alias tappB='./rotld -c BINARY   -a NORMAL -v 10 -d test-11-PAIRING-LIGHT.txt'
-alias test1='./rotld -c POOR_MAN -a LIGHT test-1-POOR_MAN-LIGHT.txt'
-alias test5='./rotld -d -v 10 -c POOR_MAN -a NORMAL test-5-BINARY-LIGHT.txt'
-alias test6='./rotld -c POOR_MAN -a LIGHT test-6-PAIRING-NORMAL.txt'
-function p2tar()
-{
-	dos2unix *.cpp *.h Makefile test-*.txt; tar -czf submit.tar.gz *.cpp *.h Makefile test-*.txt
+	printf '\e[3;0;0t' # top left
+	printf '\e[8;48;89t' # maximize vertically
 }
 
-PS1='\[\033[0;35m\]CAEN\[\033[0;33m\]\!\[\033[0;36m\]\w\[\033[m\]$ '
-alias run='./a.out'
+right()
+{
+	printf '\e[3;720;0t' # middle
+	printf '\e[8;48;89t' # maximize vertically
+}
 
-alias loc='~C'
+#Zoom the window:
+zoom()
+{
+	printf '\e[9;1t'
+}
+
+#Bring the window to the front (without changing keyboard focus):
+
+#printf '\e[5t'
+small()
+{
+	printf '\e[8;25;70t'
+}
+alias med=''
+
+alias caen='ssh narget@login.engin.umich.edu'
+alias mnt='sshfs narget@login.engin.umich.edu:e ~/rsync/e'
+alias xmnt='diskutil unmount /Users/nateargetsinger/rsync/e'
+
+login()
+{
+	ssh ''$1'@login.engin.umich.edu';
+}
+thanks()
+{
+	printf "Ya no problem bro\n"	
+}
+
+ww()
+{
+	osascript /Users/nateargetsinger/Dev/OSAS/echo.scpt
+}
+wl()
+{
+	osascript /Users/nateargetsinger/Dev/OSAS/echo.scpt
+	printf '\e[3;0;0t' # top left
+	printf '\e[8;48;89t' # maximize vertically
+}
+wr()
+{
+	osascript /Users/nateargetsinger/Dev/OSAS/echo.scpt
+	printf '\e[3;720;0t' # middle
+	printf '\e[8;48;89t' # maximize vertically
+}
+
+lh()
+{
+	osascript /Users/nateargetsinger/Dev/OSAS/lh.scpt
+	osascript /Users/nateargetsinger/Dev/OSAS/lh.scpt
+	osascript /Users/nateargetsinger/Dev/OSAS/lh.scpt
+}
+
+rh()
+{
+	osascript /Users/nateargetsinger/Dev/OSAS/rh.scpt
+	osascript /Users/nateargetsinger/Dev/OSAS/rh.scpt
+	osascript /Users/nateargetsinger/Dev/OSAS/rh.scpt
+}
+
+show()
+{
+	defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder
+}
+
+hide()
+{
+	defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder
+}
+
+send()
+{
+	scp $@ narget@login.engin.umich.edu:~/
+}
 
 
 # lsext displays long list of files of the given extension
@@ -147,33 +161,8 @@ function ll ()
     tput cup 40 0;
 }
 
-cmdir()
+alarm()
 {
-	mkdir $1;
-	cd $1;
+	sleep "$1" && afplay "$2"
 }
-#//B;;B;;B;;B;;B;;B;;B;;B;;B;;B;;B;;B;;B;;file bookmark
-
-#alias d2u='dos2unix -U*; tar czf ./submit.tar.gz *.cpp *.h Makefile test*.txt'
-#fast access to config files
-#some runstuffs for proj2:
-alias run1='./rotld -c POOR_MAN -a LIGHT -v 4 infile.txt'
-alias run2='./rotld -c SORTED -a LIGHT -d -v 5 infile.txt'
-alias run3='./rotld -c BINARY -a LIGHT -d -v 6 infile.txt'
-alias run4='./rotld -c POOR_MAN -a NORMAL -d infile.txt'
-
-
-alias vV='vim ~/.vimrc'
-alias vB='vim ~/.bashrc'
-
-#load *.cpp and *.h files to buffer
-alias vp='vim ./*.cpp ./*.h'
-
-alias vbi='vim +BundleInstall +qall'  #install bundles from vundle
-alias v*='vim *'
-alias run='./a.out'
-alias cdv='cd ~/.vim/bundle'
-alias cdms='cd ~/e/p2/s2'
-alias v='vim'
-# Creates an archive (*.tar.gz) from given directory.
-alias vN="vim ~/.bash_profile"
+#}}}
