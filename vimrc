@@ -56,11 +56,39 @@ filetype plugin indent on     " required
 "" NOTE: comments after Bundle commands are not allowed.
 "" Put your stuff after this line"}}}
 "{{{Nate Argetsinger's .vimrc
+"Always"{{{
+" Update this buffer when write         BUGGY ODDLY NOT WORKING
+"autocmd! bufwritepost :source ~/.vimrc
+
+""Remap mapleader key from default <\> to <,>
+let mapleader=","
+
+""Make it easy to escape.  Just press j twice, quickly.
+imap jj <esc>
+set timeout timeoutlen=300 ttimeoutlen=100
+imap jk <esc>
+
+"save the state of your folds yo!
+au BufWinLeave * mkview
+au BufWinEnter * silent loadview
+"}}}
 "{{{Universal
+if has("gui_running")
+	set updatetime=420
+	autocmd CursorHold * call Timer()
+	function! Timer()
+	  call feedkeys("f\e")
+	  echo strftime("%c")
+	  " K_IGNORE keycode does not work after version 7.2.025)
+	  " there are numerous other keysequences that you can use
+	endfunction
+endif
+"Run this command to delete trailing whitespace
+":%s/\s\+$//
+
 " Update buffer from file
 nnoremap <F1> :bufdo e!<cr>
 
-" =========================
 " Jump to exact position of mark instead of beginning of line
 nnoremap ' `
 nnoremap ` '
@@ -147,7 +175,7 @@ map <F3> :source ~/.vim_session <CR>
 ""make search highlights less painfull on the eyes
 "hi Search cterm=NONE ctermfg=grey ctermbg=blue
 
-""Make Y behave like D and C 
+""Make Y behave like D and C
 nnoremap Y y$
 
 ""make vim show you what keys have been pressed (lower right)
@@ -186,14 +214,6 @@ set whichwrap=<,>,[,]
 "" New window splits will open on the bottom or to the right
 set splitbelow
 set splitright
-"}}}
-"{{{Always
-""Remap mapleader key from default <\> to <,>
-let mapleader=","
-
-""make it easy to escape.  just press j twice, quickly.
-imap jj <esc>
-set timeout timeoutlen=300 ttimeoutlen=100
 "}}}
 "{{{Mac Specific
 let g:ycm_filepath_completion_use_working_dir=1

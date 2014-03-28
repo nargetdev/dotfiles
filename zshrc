@@ -1,4 +1,5 @@
 # The following lines were added by compinstall
+alias caen='ssh -X narget@login.engin.umich.edu'
 
 zstyle ':completion:*' list-colors ''
 zstyle :compinstall filename '/Users/nateargetsinger/.zshrc'
