@@ -1,16 +1,9 @@
-"Note: For _keystrokes_ do not type the underscores, only the keystrokes.
-"Press _zo_ to open a fold. _zc_ to close.
-"{{{About folds
-""use "{{{stuff to be folded"}}} syntax for folding
-set foldmethod=marker
-
-"type :h fold to learn about folds
-"}}}
+"VVV;;;
 "{{{Vundle
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-"make vundle source from ssh
+" make vundle source from ssh not https
 let g:vundle_default_git_proto = 'git'
 
 " set the runtime path to include Vundle and initialize
@@ -33,65 +26,65 @@ Bundle 'tpope/vim-fugitive'
 " Pass the path to set the runtimepath properly.
 "Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 " scripts from http://vim-scripts.org/vim/scripts.html
+Bundle 'vimux'
+Bundle 'Conque-Shell'
+Bundle 'ShowMarks'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'nerdcommenter'
 Bundle 'vim-powerline'
 Bundle 'ctrlp.vim'
-"Bundle 'Syntastic'
-"Bundle 'gdbvim'
-"Bundle 'AutoComplPop'
-"Bundle 'Ideone.vim'
-"Bundle 'OmniCppComplete'
-"Bundle 'ShowMarks'
-"Bundle 'The-NERD-tree'
-"Bundle 'minibufexpl.vim'
-"Bundle 'project.tar.gz'
-"Bundle 'AutoComplPop'
-"Bundle 'idevim.tgz'
-"Bundle 'c.vim'
-"Bundle 'STL-improved'
-"Bundle 'nerdcommenter'
-"Bundle 'sparkup'
-"Bundle 'vim-colors-solarized'
-"Bundle 'vim-colorschemes'
 "Bundle 'L9'
 "Bundle 'FuzzyFinder'
-"Bundle 'ide'
-"Bundle 'clewn.vim'
 " scripts not on GitHub
+"Bundle 'git@github.com:vim-scripts/c.vim.git'
 "Bundle 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
 "Bundle 'file:///home/gmarik/path/to/plugin'
 " ...
 
 filetype plugin indent on     " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install (update) bundles
-" :BundleSearch(!) foo - search (or refresh cache first) for foo
-" :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle commands are not allowed.
-" Put your stuff after this line
-"}}}
+"" To ignore plugin indent changes, instead use:
+""filetype plugin on
+""
+"" Brief help
+"" :BundleList          - list configured bundles
+"" :BundleInstall(!)    - install (update) bundles
+"" :BundleSearch(!) foo - search (or refresh cache first) for foo
+"" :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
+"" j
+"" see :h vundle for more details or wiki for FAQ
+"" NOTE: comments after Bundle commands are not allowed.
+"" Put your stuff after this line"}}}
 "{{{Nate Argetsinger's .vimrc
-"{{{Mac Specific
-"let g:ycm_collect_identifiers_from_tags_files=1
-"let g:ycm_seed_identifiers_with_syntax=1
-"let g:ycm_extra_conf_vim_data=['v:version']
-"}}}
-"{{{Linux Specific
-"let g:ycm_path_to_python_interpreter='/usr/bin/python'
-"let g:syntastic_cpp_checkers='gcc'
-"let g:syntastic_cpp_compiler='clang++'
-"let g:syntastic_cpp_compiler_options='-std=c++11 -stdlib=libc++'
-"let g:syntastic_debug=1
-"}}}
 "{{{Universal
+" Update buffer from file
+nnoremap <F1> :bufdo e!<cr>
+
+" =========================
+" Jump to exact position of mark instead of beginning of line
+nnoremap ' `
+nnoremap ` '
+
+" Fast Exits
+"""UNSTABLE
+"nnoremap ZZ :bufdo update<cr> :qa!<cr>
+
+" Vimux
+ map <silent> <LocalLeader>rl :wa<CR> :VimuxRunLastCommand<CR>
+ map <silent> <LocalLeader>vi :wa<CR> :VimuxInspectRunner<CR>
+ map <silent> <LocalLeader>vk :wa<CR> :VimuxInterruptRunner<CR>
+ map <silent> <LocalLeader>vx :wa<CR> :VimuxClosePanes<CR>
+ map <silent> <LocalLeader>vp :VimuxPromptCommand<CR>
+ vmap <silent> <LocalLeader>vs "vy :call VimuxRunCommand(@v)<CR>
+ nmap <silent> <LocalLeader>vs vip<LocalLeader>vs<CR>
+""allow incrementing of letters as well as numbers using <c-a> <c-x>
+:set nf=octal,hex,alpha
+
+""togle for sensible paste functionality.
+set pastetoggle=<F4>
+
+" Execute a command;
+nnoremap <c-c> :!
 "{{{Bufferstuffs
 ""Mappings to access buffers (don't use '\p' because a
 "" delay before pressing 'p' would accidentally paste).
@@ -142,16 +135,14 @@ set confirm "put a safety on the gun
  set wrap "Wrap lines
 
 "" Automatic bracket completion
-"inoremap {      {}<Left>
-"inoremap {<CR>  {<CR>}<Esc>O
-"inoremap {{     {
-"inoremap {}     {}
-"imap jj <esc>
-"set timeout timeoutlen=300 ttimeoutlen=100
+inoremap {      {}<Left>
+inoremap {<CR>  {<CR>}<Esc>O
+inoremap {{     {
+inoremap {}     {}
 "}}}
 ""Write and load session (window, info, stuffs)
-map <F2> :mksession! ~/vim_session <CR>
-map <F3> :source ~/vim_session <CR>
+map <F2> :mksession! ~/.vim_session <CR>
+map <F3> :source ~/.vim_session <CR>
 
 ""make search highlights less painfull on the eyes
 "hi Search cterm=NONE ctermfg=grey ctermbg=blue
@@ -182,9 +173,6 @@ set foldmethod=marker
 let g:solarized_termcolors=256
 syntax enable
 
-"Remap mapleader key from default <\> to <,>
-let mapleader=","
-
 "" Line numbers to the right
 set number
 highlight LineNr ctermfg=darkgrey
@@ -199,8 +187,32 @@ set whichwrap=<,>,[,]
 set splitbelow
 set splitright
 "}}}
+"{{{Always
+""Remap mapleader key from default <\> to <,>
+let mapleader=","
+
+""make it easy to escape.  just press j twice, quickly.
+imap jj <esc>
+set timeout timeoutlen=300 ttimeoutlen=100
+"}}}
+"{{{Mac Specific
+let g:ycm_filepath_completion_use_working_dir=1
+"let g:ycm_extra_conf_globlist=['~/eecs/281market/*']
+let g:ycm_extra_conf_globlist=['../*']
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_extra_conf_vim_data=['v:version']
+"}}}
+"{{{Linux Specific
+"let g:ycm_path_to_python_interpreter='/usr/bin/python'
+"let g:syntastic_cpp_checkers='gcc'
+"let g:syntastic_cpp_compiler='clang++'
+"let g:syntastic_cpp_compiler_options='-std=c++11 -stdlib=libc++'
+"let g:syntastic_debug=1
+"}}}
 "}}}
 "{{{Martin Brochhaus's .vimrc
+"{{{
 "========================================
 " Sample .vimrc file by Martin Brochhaus
 " Presented at PyCon APAC 2012
@@ -286,8 +298,6 @@ color wombat256mod
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
-filetype off
-filetype plugin indent on
 syntax on
 
 
@@ -339,7 +349,8 @@ set noswapfile
 " Now you can install any plugin into a .vim/bundle/plugin-name/ folder
 "" call pathogen#infect()
 
-
+"}}}
+"{{{Python IDE
 " ============================================================================
 " Python IDE Setup
 " ============================================================================
@@ -359,52 +370,53 @@ set laststatus=2
  set wildignore+=*_build/*
  set wildignore+=*/coverage/*
 
-
+"{{{Archived
 " Settings for python-mode
 " Note: I'm no longer using this. Leave this commented out
 " and uncomment the part about jedi-vim instead
 " cd ~/.vim/bundle
 " git clone https://github.com/klen/python-mode
- map <Leader>g :call RopeGotoDefinition()<CR>
- let ropevim_enable_shortcuts = 1
- let g:pymode_rope_goto_def_newwin = "vnew"
- let g:pymode_rope_extended_complete = 1
- let g:pymode_breakpoint = 0
- let g:pymode_syntax = 1
- let g:pymode_syntax_builtin_objs = 0
- let g:pymode_syntax_builtin_funcs = 0
- map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
-
+" map <Leader>g :call RopeGotoDefinition()<CR>
+" let ropevim_enable_shortcuts = 1
+" let g:pymode_rope_goto_def_newwin = "vnew"
+" let g:pymode_rope_extended_complete = 1
+" let g:pymode_breakpoint = 0
+" let g:pymode_syntax = 1
+" let g:pymode_syntax_builtin_objs = 0
+" let g:pymode_syntax_builtin_funcs = 0
+" map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+"}}}
+"Jedi"{{{
 " Settings for jedi-vim
 " cd ~/.vim/bundle
 " git clone git://github.com/davidhalter/jedi-vim.git
- let g:jedi#related_names_command = "<leader>z"
- let g:jedi#popup_on_dot = 0
- let g:jedi#popup_select_first = 0
- map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+" let g:jedi#related_names_command = "<leader>z"
+" let g:jedi#popup_on_dot = 0
+" let g:jedi#popup_select_first = 0
+" map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Better navigating through omnicomplete option list
 " See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
- set completeopt=longest,menuone
- function! OmniPopup(action)
-     if pumvisible()
-         if a:action == 'j'
-             return "\<C-N>"
-         elseif a:action == 'k'
-             return "\<C-P>"
-         endif
-     endif
-     return a:action
- endfunction
-
- inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
- inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
+" set completeopt=longest,menuone
+" function! OmniPopup(action)
+"     if pumvisible()
+"         if a:action == 'j'
+"             return "\<C-N>"
+"         elseif a:action == 'k'
+"             return "\<C-P>"
+"         endif
+"     endif
+"     return a:action
+" endfunction
+"}}}
+" inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
+" inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
 
 " Python folding
 " mkdir -p ~/.vim/ftplugin
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
-"" set nofoldenable
+"" set nofoldenable"}}}
 "}}}
 "{{{Colors
 "hi x016_Grey0 ctermfg=16 guifg=#000000 "rgb=0,0,0

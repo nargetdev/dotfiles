@@ -1,22 +1,51 @@
 #{{{alias
+alias Xsync='sshfs narget@login.engin.umich.edu:~/e/p3 ~/eecs/281market'
+alias nosync='umount ~/eecs/281market'
+ #alias nosync='diskutil unmount ~/eecs/p3'
+alias ls='ls -G'
 alias tls='tmux ls'
 alias tmux='tmux -2'
+
+# cd shortcuts
+alias cdd='cd ~/dotfiles'
 alias cdm='cd ~/eecs/281market'
 alias cdv='cd ~/.vim/bundle'
-alias BB='source ~/.bashrc'
-alias vN='vim ~/.bash_profile'
-alias vB='vim ~/.bash_profile'
 
+# edit a certain file shortcuts
+alias vN='vim ~/.bash_profile'
 alias vB='vim ~/.bashrc'
 alias vV='vim ~/.vimrc'
+
+# resource from ~/.bashrc so you don't have to logout and log back in
+alias BB='source ~/.bashrc'
+
+
+alias vp='vim *.h *.cpp'
 alias v='vim'
+
+#NOTE: this won't work for you cause you aint me.
 alias autocaen='osascript /Users/nateargetsinger/Dev/OSAS/acaen.scpt'
 alias auto='autocaen &'
+alias caen='ssh narget@login.engin.umich.edu'
 
 alias play='afplay -q 1'
 alias vim='~/vim'
+
+alias mnt='sshfs narget@login.engin.umich.edu:e ~/rsync/e'
+alias xmnt='diskutil unmount /Users/nateargetsinger/rsync/e'
 #}}}
 #{{{Function Section
+function pb() {
+    echo "$@" | pbcopy
+}
+grabX()
+{
+	mkdir -pv ~/eecs/281market/safetynet
+	cp -v ~/eecs/281market/{*.h,*.cpp} ~/eecs/281market/safetynet
+	touch ~/eecs/281market/safetynet/timestamp.txt
+	date > ~/eecs/281market/safetynet/timestamp.txt
+	cp -v ~/eecs/Xmarket/{*.h,*.cpp} ~/eecs/281market
+}
 attach()
 {
 	tmux attach-session -t $1
@@ -56,11 +85,7 @@ small()
 {
 	printf '\e[8;25;70t'
 }
-alias med=''
 
-alias caen='ssh narget@login.engin.umich.edu'
-alias mnt='sshfs narget@login.engin.umich.edu:e ~/rsync/e'
-alias xmnt='diskutil unmount /Users/nateargetsinger/rsync/e'
 
 login()
 {
