@@ -1,12 +1,15 @@
-#KG assurance Mar28_2147
+#KG Mar28_2147
 #{{{alias
 alias now='date +"%b%d_%H%M"'
 
 alias ls='ls --color'
 
-alias Xsync='sshfs narget@login.engin.umich.edu:~/e/p3 ~/eecs/281market'
-alias nosync='umount ~/eecs/281market'
- #alias nosync='diskutil unmount ~/eecs/p3'
+# This is for sshfs (EXTREMELY USEFUL) locally on my mac.
+# Kept here for your reference.
+#alias Xsync='sshfs narget@login.engin.umich.edu:~/e/p3 ~/eecs/281market'
+#alias nosync='umount ~/eecs/281market'
+#alias nosync='diskutil unmount ~/eecs/p3'
+
 alias tls='tmux ls'
 alias tmux='tmux -2'
 
@@ -23,7 +26,6 @@ alias vV='vim ~/.vimrc'
 # resource from ~/.bashrc so you don't have to logout and log back in
 alias BB='source ~/.bash_profile'
 
-
 alias vp='vim *.h *.cpp'
 alias v='vim'
 
@@ -34,16 +36,9 @@ alias caen='ssh narget@login.engin.umich.edu'
 
 alias play='afplay -q 1'
 
-alias mnt='sshfs narget@login.engin.umich.edu:e ~/rsync/e'
-alias xmnt='diskutil unmount /Users/nateargetsinger/rsync/e'
+#alias mnt='sshfs narget@login.engin.umich.edu:e ~/rsync/e'
+#alias xmnt='diskutil unmount /Users/nateargetsinger/rsync/e'
 #alias d2u='dos2unix -U*; tar czf ./submit.tar.gz *.cpp *.h Makefile test*.txt'
-alias vV='vim ~/.vimrc'
-alias vB='vim ~/.bashrc'
-alias vN="vim ~/.bash_profile"
-alias BB='source ~/.bash_profile'
-
-#load *.cpp and *.h files to buffer
-alias vp='vim ./*.cpp ./*.h'
 
 alias vbi='vim +BundleInstall +qall'  #install bundles from vundle
 alias run='./a.out'
