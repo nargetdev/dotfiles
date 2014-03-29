@@ -1,4 +1,1 @@
-dotfiles
-========
-
-Welcome to configuration-land.
+These configs should all be compatible within CAEN
