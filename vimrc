@@ -1,4 +1,8 @@
-"VVV;;;
+"To do list:
+"Implement proper if statement response 
+" README"{{{
+" 
+"}}}
 "{{{Vundle
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -20,19 +24,30 @@ Bundle 'gmarik/vundle'
 " Keep bundle commands between here and filetype plugin indent on.
 " scripts on GitHub repos
 Bundle 'tpope/vim-fugitive'
+Bundle 'ap/vim-css-color'
+Bundle 'Lokaltog/powerline'
 "Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'tpope/vim-rails.git'
 " The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
+" Pass the path to set the r0ntimepath properly.
 "Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 " scripts from http://vim-scripts.org/vim/scripts.html
+Bundle 'Lucius'
+Bundle 'The-NERD-tree'
+Bundle 'css_color.vim'
+Bundle 'minibufexpl.vim'
+Bundle 'pbcopy.vim'
 Bundle 'vimux'
 Bundle 'Conque-Shell'
 Bundle 'ShowMarks'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'nerdcommenter'
-Bundle 'vim-powerline'
+"Bundle 'vim-powerline'
 Bundle 'ctrlp.vim'
+"Color Schemes
+"=============
+Bundle 'mayansmoke'
+"=============
 "Bundle 'L9'
 "Bundle 'FuzzyFinder'
 " scripts not on GitHub
@@ -41,6 +56,55 @@ Bundle 'ctrlp.vim'
 " git repos on your local machine (i.e. when working on your own plugin)
 "Bundle 'file:///home/gmarik/path/to/plugin'
 " ...
+"
+" Jamie Plugins
+" Bundles (plugins)
+Bundle 'Lokaltog/vim-powerline'
+
+if v:version < 703 || !has('patch584')
+  Bundle 'tsaleh/vim-supertab'
+else
+  Bundle 'Valloric/YouCompleteMe'
+endif
+
+Bundle 'airblade/vim-gitgutter'
+Bundle 'godlygeek/tabular'
+Bundle 'kien/ctrlp.vim'
+Bundle 'majutsushi/tagbar'
+Bundle 'matthias-guenther/hammer.vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'python_match.vim'
+Bundle 'sjl/gundo.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'vim-scripts/file-line'
+Bundle 'vim-scripts/matchit.zip'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'phleet/vim-arcanist'
+
+" Language Support
+Bundle 'digitaltoad/vim-jade'
+Bundle 'groenewege/vim-less'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'nono/vim-handlebars'
+Bundle 'skammer/vim-css-color'
+Bundle 'derekwyatt/vim-scala'
+Bundle 'wavded/vim-stylus'
+Bundle 'pangloss/vim-javascript'
+
+" Color
+Bundle "Solarized"
+Bundle "altercation/vim-colors-solarized"
+
+
+set t_Co=16
+set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
+let g:solarized_termcolors=16
 
 filetype plugin indent on     " required
 "" To ignore plugin indent changes, instead use:
@@ -57,8 +121,16 @@ filetype plugin indent on     " required
 "" Put your stuff after this line"}}}
 "{{{Nate Argetsinger's .vimrc
 "Always"{{{
+" write the file, and dip out from insert mode
+
+noremap <F1> :source ~/.vimrc<cr>
+
 " Update this buffer when write         BUGGY ODDLY NOT WORKING
 "autocmd! bufwritepost :source ~/.vimrc
+call pathogen#infect()
+
+"use this shit:  "{{{"}}}
+set foldmethod=marker
 
 ""Remap mapleader key from default <\> to <,>
 let mapleader=","
@@ -69,25 +141,96 @@ set timeout timeoutlen=300 ttimeoutlen=100
 imap jk <esc>
 
 "save the state of your folds yo!
-au BufWinLeave * mkview
-au BufWinEnter * silent loadview
+"au BufWinLeave * mkview
+"au BufWinEnter * silent loadview
 "}}}
 "{{{Universal
-if has("gui_running")
-	set updatetime=420
-	autocmd CursorHold * call Timer()
-	function! Timer()
-	  call feedkeys("f\e")
-	  echo strftime("%c")
-	  " K_IGNORE keycode does not work after version 7.2.025)
-	  " there are numerous other keysequences that you can use
-	endfunction
+nnoremap <F4> "=strftime("%c")<CR>Po<tab>
+"
+"nnoremap <F5> :colors wombat256mod<CR>
+nnoremap <F6> :colors mayansmoke<cr>
+nnoremap <2-leftmouse> za
+
+"if has("gui_running")
+	"set updatetime=420
+	"autocmd CursorHold * call Timer()
+	"function! Timer()
+	  "call feedkeys("f\e")
+	  "echo strftime("%c")
+	  "" K_IGNORE keycode does not work after version 7.2.025)
+	  "" there are numerous other keysequences that you can use
+	"endfunction
+"endif
+
+" Basic cursor movement and deletion keybindings from emacs, for vim."{{{
+
+" on macvim, use option as meta key
+if has("gui_macvim")
+  set macmeta
 endif
+
+" insert mode
+imap <C-b> <Left>
+imap <C-f> <Right>
+imap <C-a> <C-o>:call <SID>home()<CR>
+imap <C-e> <End>
+imap <M-b> <C-o>b
+imap <M-f> <C-o>e<Right>
+imap <C-d> <Del>
+imap <C-h> <BS>
+imap <M-d> <C-o>de
+imap <M-h> <C-w>
+imap <C-k> <C-r>=<SID>kill_line()<CR>
+
+imap <C-p> <Up>
+imap <C-n> <Down>
+
+" command line mode
+"cmap <C-p> <Up>     "I like the previous command,
+"cmap <C-n> <Down>   "next command funcionality.
+cmap <C-b> <Left>
+cmap <C-f> <Right>
+cmap <C-a> <Home>
+cmap <C-e> <End>
+cmap <M-b> <S-Left>
+cmap <M-f> <S-Right>
+cnoremap <C-d> <Del>
+cnoremap <C-h> <BS>
+cnoremap <M-d> <S-Right><C-w>
+cnoremap <M-h> <C-w>
+cnoremap <C-k> <C-f>D<C-c><C-c>:<Up>
+
+function! s:home()
+  let start_col = col('.')
+  normal! ^
+  if col('.') == start_col
+    normal! 0
+  endif
+  return ''
+endfunction
+
+function! s:kill_line()
+  let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
+  if len(text_after_cursor) == 0
+    normal! J
+  else
+    call setline(line('.'), text_before_cursor)
+  endif
+  return ''
+endfunction
+
+function! s:split_line_text_at_cursor()
+  let line_text = getline(line('.'))
+  let text_after_cursor  = line_text[col('.')-1 :]
+  let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
+  return [text_before_cursor, text_after_cursor]
+endfunction
+"}}}
 "Run this command to delete trailing whitespace
 ":%s/\s\+$//
 
 " Update buffer from file
-nnoremap <F1> :bufdo e!<cr>
+"nnoremap <F1> :bufdo e!<cr>
 
 " Jump to exact position of mark instead of beginning of line
 nnoremap ' `
@@ -106,10 +249,10 @@ nnoremap ` '
  vmap <silent> <LocalLeader>vs "vy :call VimuxRunCommand(@v)<CR>
  nmap <silent> <LocalLeader>vs vip<LocalLeader>vs<CR>
 ""allow incrementing of letters as well as numbers using <c-a> <c-x>
-:set nf=octal,hex,alpha
+:set nf=octal,hex
 
 ""togle for sensible paste functionality.
-set pastetoggle=<F4>
+set pastetoggle=<F10>
 
 " Execute a command;
 nnoremap <c-c> :!
@@ -153,20 +296,20 @@ set confirm "put a safety on the gun
  " Be smart when using tabs ;)
  set smarttab
 
- " 1 tab == 4 spaces
- set shiftwidth=4
- set tabstop=4
- set softtabstop=4
+ " 1 tab == 2 spaces
+ set shiftwidth=2
+ set tabstop=2
+ set softtabstop=2
 
  set ai "Auto indent
  set si "Smart indent
  set wrap "Wrap lines
 
 "" Automatic bracket completion
-inoremap {      {}<Left>
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{     {
-inoremap {}     {}
+"inoremap {      {}<Left>
+inoremap <leader>{  {<CR>}<Esc>O
+"inoremap {{     {
+"inoremap {}     {}
 "}}}
 ""Write and load session (window, info, stuffs)
 map <F2> :mksession! ~/.vim_session <CR>
@@ -184,7 +327,7 @@ set showcmd
 ""get ready to jump to (row,col)
 "nnoremap <c-x> :cal cursor(
 
-""Case aint no thang for searching
+""Case aint no1thang for searching
 set ignorecase
 
 ""Highlight the current line
@@ -199,7 +342,7 @@ autocmd InsertLeave * if col('.') != CursorColumnI | call cursor(0, col('.')+1) 
 
 set foldmethod=marker
 let g:solarized_termcolors=256
-syntax enable
+"syntax enable
 
 "" Line numbers to the right
 set number
@@ -216,12 +359,14 @@ set splitbelow
 set splitright
 "}}}
 "{{{Mac Specific
+let g:ycm_warning_symbol = 'W!'
 let g:ycm_filepath_completion_use_working_dir=1
 "let g:ycm_extra_conf_globlist=['~/eecs/281market/*']
-let g:ycm_extra_conf_globlist=['../*']
+let g:ycm_extra_conf_globlist=['~/*']  "stop confirmation dialogue
 let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_extra_conf_vim_data=['v:version']
+let g:ycm_global_ycm_extra_conf = '~/'
 "}}}
 "{{{Linux Specific
 "let g:ycm_path_to_python_interpreter='/usr/bin/python'
@@ -229,6 +374,58 @@ let g:ycm_extra_conf_vim_data=['v:version']
 "let g:syntastic_cpp_compiler='clang++'
 "let g:syntastic_cpp_compiler_options='-std=c++11 -stdlib=libc++'
 "let g:syntastic_debug=1
+"}}}
+"Hacks"{{{
+"function! WriteFile() 
+  "if &buftype == ""
+    "write
+  "endif
+  "return '%f %h%w%m%r%=%-14(%l,%c%V%) %(%P%)'
+"endfunction
+"setlocal statusline=%!WriteFile()
+"set laststatus=2
+"
+"
+let prvft='f'
+let prvftc=32
+fun! MLvF(c,...)
+    let [g:prvftc,g:prvft]=[a:c,a:0? 'f':'F']
+    let pos=searchpos('\C\V'.nr2char(g:prvftc),'bW')
+    call setpos("'x", pos==[0,0]? [0,line('.'),col('.'),0] : [0,pos[0],pos[1],0])
+    return "`x"
+endfun
+fun! MLvf(c,...)
+    let [g:prvftc,g:prvft]=[a:c,a:0? 'F':'f']
+    let pos=searchpos('\C\V'.nr2char(g:prvftc).(mode(1)=='no'? '\zs' : ''),'W')
+    call setpos("'x", pos==[0,0]? [0,line('.'),col('.'),0] : [0,pos[0],pos[1],0])
+    return "`x"
+endfun
+fun! MLvT(c,...)
+    let [g:prvftc,g:prvft]=[a:c,a:0? 't':'T']
+    let pos=searchpos('\C\V'.nr2char(g:prvftc).'\zs','bW')
+    call setpos("'x", pos==[0,0]? [0,line('.'),col('.'),0] : [0,pos[0],pos[1],0])
+    return "`x"
+endfun
+fun! MLvt(c,...)
+    let [g:prvftc,g:prvft]=[a:c,a:0? 'T':'t']
+    let pos=searchpos('\C\V\_.'.(mode(1)=='no'? '\zs' : '').nr2char(g:prvftc),'W')
+    call setpos("'x", pos==[0,0]? [0,line('.'),col('.'),0] : [0,pos[0],pos[1],0])
+    return "`x"
+endfun
+no <expr> F MLvF(getchar())
+no <expr> f MLvf(getchar())
+no <expr> T MLvT(getchar())
+no <expr> t MLvt(getchar())
+no <expr> ; MLv{prvft}(prvftc)
+no <expr> , MLv{prvft<#'Z'? tolower(prvft) : toupper(prvft)}(prvftc,1)
+"}}}
+" Configs (Mac)"{{{
+"}}}
+"File type specific"{{{
+" For *.txt files vim automatically handles things like Word does
+autocmd BufRead,BufNewFile   *.txt setl tw=79
+autocmd BufRead,BufNewFile   *.txt setl fo=aw2tq
+
 "}}}
 "}}}
 "{{{Martin Brochhaus's .vimrc
@@ -263,9 +460,8 @@ autocmd! bufwritepost .vimrc source %
 " Bind nohl
 " Removes highlight of your last search
 " ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
-noremap <C-n> :nohl<CR>
-vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
+nnoremap <C-n> :nohl<CR>
+"vnoremap <C-n> :nohl<CR>
 
 
 " Quicksave command
@@ -275,9 +471,10 @@ inoremap <C-Z> <C-O>:update<CR>
 
 
 " Quick quit command
-noremap <Leader>e :quit<CR>  " Quit current window
-noremap <Leader>E :qa!<CR>   " Quit all windows
-
+"noremap <Leader>e :quit<CR>  " Quit current window
+"noremap <Leader>E :qa!<CR>   " Quit all windows
+nnoremap <leader>z ZZ
+nnoremap <leader>e ZZ
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " Every unnecessary keystroke that can be saved is good for your health :)
@@ -314,7 +511,7 @@ vnoremap > >gv  " better indentation
 " wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
 set t_Co=256
 color wombat256mod
-
+"color lucius
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
@@ -326,9 +523,9 @@ syntax on
 "" set tw=79   " width of document (used by gd)
 "" set nowrap  " don't automatically wrap on load
 "" set fo-=t   " don't automatically wrap text when typing
-"set colorcolumn=80
+	 set fo+=t   " or do
+set colorcolumn=80
 "highlight colorcolumn ctermfg=255
-
 
 hi cursorline ctermbg=233
 " easier formatting of paragraphs

@@ -1,22 +1,34 @@
 #{{{alias
-alias Xsync='sshfs narget@login.engin.umich.edu:~/e/p3 ~/eecs/281market'
-alias nosync='umount ~/eecs/281market'
+alias cdc='cd /Users/nateargetsinger/dev/Codazen/codazenFrontEnd/simple-server'
+alias CCC='make clean && make release && ./base < in.txt -m FASTTSP'
+alias testbase='make clean && make release && make inMST'
+
+# cd shortcuts
+alias cdd='cd ~/dotfiles'
+alias cdm='cd /Users/nateargetsinger/dev/webDev/REVAMP_webProf'
+alias cdv='cd ~/.vim/bundle'
+alias cd281='cd ~/Desktop/281'
+alias cd314='cd ~/Desktop/314'
+alias cd395='cd ~/Desktop/395'
+alias cd455='cd ~/Desktop/455'
+alias cdsync='cd ~/eecs/281market/syncDir'
+alias myproj='cd ~/eecs/281market'
+
+alias Xsync='sshfs narget@login.engin.umich.edu:e/p3 /Users/nateargetsinger/eecs/281market/syncDir'
+#alias Xsync='sshfs narget@login.engin.umich.edu:/afs/umich.edu/user/n/a/narget/e/p3 /Users/nateargetsinger/eecs/281market'
+alias nosync='umount /Users/nateargetsinger/eecs/281market'
  #alias nosync='diskutil unmount ~/eecs/p3'
 alias ls='ls -G'
 alias tls='tmux ls'
 alias tmux='tmux -2'
 
-# cd shortcuts
-alias cdd='cd ~/dotfiles'
-alias cdm='cd ~/eecs/281market'
-alias cdv='cd ~/.vim/bundle'
-
 # edit a certain file shortcuts
 alias vN='vim ~/.bash_profile'
 alias vB='vim ~/.bashrc'
 alias vV='vim ~/.vimrc'
+alias vj='vim ~/.notes.txt'
 
-# resource from ~/.bashrc so you don't have to logout and log back in
+# resource from ~/.bashrc so you dont have to logout and log back in
 alias BB='source ~/.bashrc'
 
 
@@ -31,10 +43,50 @@ alias caen='ssh narget@login.engin.umich.edu'
 alias play='afplay -q 1'
 alias vim='~/vim'
 
+#NOTE to self: I've deleted the ~/rsync/e dir.  Use sshfs on a dir by dir
+#			   basis so to avoid bloated network sync.
 alias mnt='sshfs narget@login.engin.umich.edu:e ~/rsync/e'
 alias xmnt='diskutil unmount /Users/nateargetsinger/rsync/e'
 #}}}
 #{{{Function Section
+
+testgrab()
+{
+#!/bin/bash
+ 
+# Request size
+stty -echo
+echo -ne '\e[18t'
+ 
+# Read size char. by char. (CSI 8 ; height ; width t)
+width=
+heigh=
+p=0
+while IFS= read -r -n1 char
+do
+  # Get past CSI
+  if [[ "$p" == 0  &&  "$char" == ";" ]];  then
+    p=$((p+1))
+ 
+  # width
+  elif [[ "$p" == 1  ]];  then
+    [[ "$char" == ";" ]]  &&  p=$((p+1))  ||  height="${height}${char}"
+ 
+  # height
+  elif [[ "$p" == 2  ]];  then
+    [[ "$char" == "t" ]]  &&  break  ||  width="${width}${char}"
+ 
+  fi
+done
+ 
+# Done
+stty echo
+echo -e "width=$width\nheight=$height"
+}
+
+function cmdir(){
+	mkdir $1 && cd $1;
+}
 function pb() {
     echo "$@" | pbcopy
 }
@@ -127,6 +179,8 @@ rh()
 	osascript /Users/nateargetsinger/Dev/OSAS/rh.scpt
 }
 
+
+
 show()
 {
 	defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder
@@ -139,7 +193,7 @@ hide()
 
 send()
 {
-	scp $@ narget@login.engin.umich.edu:~/
+	scp $@ narget@login.engin.umich.edu:
 }
 
 
@@ -148,6 +202,8 @@ function lsext()
 {
 find . -type f -iname '*.'${1}'' -exec ls -l {} \; ;
 }
+
+
 
 # batchexec executes a given linux command on a group of files
 function batchexec()
@@ -178,6 +234,7 @@ function mach()
 }
 
 # ll function formats the ls -l output better
+
 function ll ()
 {
     clear;
@@ -186,8 +243,28 @@ function ll ()
     tput cup 40 0;
 }
 
-alarm()
+#autoload -Uz compinit
+#compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=420
+SAVEHIST=1000
+# End of lines configured by zsh-newuser-install
+
+#Use MacVim
+#export PATH="/usr/local/bin/mvim:$PATH"
+
+#PS1="\[\033[0;35m\]MOTHERSHIP\[\033[0;33m\]\[\033[0;36m\]\w\[\033[m\]\[\033[0;33m\]\$git_branch\$git_dirt\[$txtrst\]\$ "
+#
+#Functions!!!
+function swap()         
 {
-	sleep "$1" && afplay "$2"
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
 }
-#}}}
+
+export EDITOR=/usr/local/Cellar/macvim/7.4-72/MacVim.app/Contents/MacOS/Vim
+alias remake='make clean && make debug'
