@@ -4,6 +4,7 @@ alias CCC='make clean && make release && ./base < in.txt -m FASTTSP'
 alias testbase='make clean && make release && make inMST'
 
 # cd shortcuts
+alias cdb='cd ~/backups'
 alias cdd='cd ~/dotfiles'
 alias cdm='cd /Users/nateargetsinger/dev/webDev/REVAMP_webProf'
 alias cdv='cd ~/.vim/bundle'
@@ -50,6 +51,18 @@ alias mnt='sshfs narget@login.engin.umich.edu:e ~/rsync/e'
 alias xmnt='diskutil unmount /Users/nateargetsinger/rsync/e'
 #}}}
 #{{{Function Section
+#
+# simple backup function.  Sends backup to ~/backups inside a folder called: <<thisdir>>.$date
+backup ()
+{
+	result=${PWD##*/}
+	mkdir -p ~/backups/$result.$(date +%Y_%m_%d_%H:%M)
+	for f in "$@"
+		do cp -a "$f" ~/backups/$result.$(date +%Y_%m_%d_%H:%M)/"$f".bak.$(date +%Y%m%d%H%M);
+			echo "sent $f to ~/backups/$result.$(date +%Y_%m_%d_%H:%M)";
+	done
+}
+
 vplus()
 {
 #!/bin/bash
