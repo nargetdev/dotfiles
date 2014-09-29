@@ -1,10 +1,17 @@
-"To do list:
-"Implement proper if statement response 
+"{{{ TO USE FOLDS --> :set foldmethod=marker
+"use this shit:  "{{{"}}}
+set foldmethod=marker
+"save the state of your folds yo!
+"au BufWinLeave * mkview
+"au BufWinEnter * silent loadview
+"}}}
 " README"{{{
-" 
+
 "}}}
 "{{{Vundle
 set nocompatible              " be iMproved, required
+
+" Historical note: means not compatible with vi
 filetype off                  " required
 
 " make vundle source from ssh not https
@@ -20,27 +27,40 @@ call vundle#rc()
 " let Vundle manage Vundle, required
 Bundle 'gmarik/vundle'
 
+" New stuffs
+Bundle 'benmills/vimux' 
+Bundle 'christoomey/vim-tmux-navigator'
+
 " The following are examples of different formats supported.
 " Keep bundle commands between here and filetype plugin indent on.
 " scripts on GitHub repos
 Bundle 'tpope/vim-fugitive'
-Bundle 'ap/vim-css-color'
 Bundle 'Lokaltog/powerline'
 "Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'tpope/vim-rails.git'
 " The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the r0ntimepath properly.
+" Pass the path to set the runtimepath properly.
 "Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 " scripts from http://vim-scripts.org/vim/scripts.html
+"
+"don't remove
+
+Bundle 'solarized'
+Bundle 'vim-supertab'
+
+Bundle 'Arduino-syntax-file'
+Bundle 'Gundo'
+Bundle 'YouCompleteMe'
+"
 Bundle 'Lucius'
 Bundle 'The-NERD-tree'
-Bundle 'css_color.vim'
+"Bundle 'css_color.vim'
 Bundle 'minibufexpl.vim'
 Bundle 'pbcopy.vim'
 Bundle 'vimux'
 Bundle 'Conque-Shell'
 Bundle 'ShowMarks'
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'nerdcommenter'
 "Bundle 'vim-powerline'
 Bundle 'ctrlp.vim'
@@ -57,15 +77,18 @@ Bundle 'mayansmoke'
 "Bundle 'file:///home/gmarik/path/to/plugin'
 " ...
 "
+Bundle 'mattn/emmet-vim'
+
+
 " Jamie Plugins
 " Bundles (plugins)
 Bundle 'Lokaltog/vim-powerline'
 
-if v:version < 703 || !has('patch584')
-  Bundle 'tsaleh/vim-supertab'
-else
-  Bundle 'Valloric/YouCompleteMe'
-endif
+"if v:version < 703 || !has('patch584')
+"  Bundle 'tsaleh/vim-supertab'
+"else
+"Bundle 'Valloric/YouCompleteMe'
+"endif
 
 Bundle 'airblade/vim-gitgutter'
 Bundle 'godlygeek/tabular'
@@ -104,7 +127,6 @@ set t_Co=16
 set background=dark
 colorscheme solarized
 let g:solarized_termcolors=256
-let g:solarized_termcolors=16
 
 filetype plugin indent on     " required
 "" To ignore plugin indent changes, instead use:
@@ -119,18 +141,7 @@ filetype plugin indent on     " required
 "" see :h vundle for more details or wiki for FAQ
 "" NOTE: comments after Bundle commands are not allowed.
 "" Put your stuff after this line"}}}
-"{{{Nate Argetsinger's .vimrc
-"Always"{{{
-" write the file, and dip out from insert mode
-
-noremap <F1> :source ~/.vimrc<cr>
-
-" Update this buffer when write         BUGGY ODDLY NOT WORKING
-"autocmd! bufwritepost :source ~/.vimrc
-call pathogen#infect()
-
-"use this shit:  "{{{"}}}
-set foldmethod=marker
+"{{{Universal
 
 ""Remap mapleader key from default <\> to <,>
 let mapleader=","
@@ -140,16 +151,6 @@ imap jj <esc>
 set timeout timeoutlen=300 ttimeoutlen=100
 imap jk <esc>
 
-"save the state of your folds yo!
-"au BufWinLeave * mkview
-"au BufWinEnter * silent loadview
-"}}}
-"{{{Universal
-nnoremap <F4> "=strftime("%c")<CR>Po<tab>
-"
-"nnoremap <F5> :colors wombat256mod<CR>
-nnoremap <F6> :colors mayansmoke<cr>
-nnoremap <2-leftmouse> za
 
 "if has("gui_running")
 	"set updatetime=420
@@ -229,8 +230,6 @@ endfunction
 "Run this command to delete trailing whitespace
 ":%s/\s\+$//
 
-" Update buffer from file
-"nnoremap <F1> :bufdo e!<cr>
 
 " Jump to exact position of mark instead of beginning of line
 nnoremap ' `
@@ -251,8 +250,6 @@ nnoremap ` '
 ""allow incrementing of letters as well as numbers using <c-a> <c-x>
 :set nf=octal,hex
 
-""togle for sensible paste functionality.
-set pastetoggle=<F10>
 
 " Execute a command;
 nnoremap <c-c> :!
@@ -280,7 +277,7 @@ nnoremap <Leader>0 :10b<CR>
 "set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 ""Discard buffer in current window
-nnoremap <Leader>d :bdelete<CR>
+nnoremap <Leader>d :bdelete %<cr>
 
 ""Access window commands with {,w}
 nnoremap <Leader>w <c-w>
@@ -311,9 +308,6 @@ inoremap <leader>{  {<CR>}<Esc>O
 "inoremap {{     {
 "inoremap {}     {}
 "}}}
-""Write and load session (window, info, stuffs)
-map <F2> :mksession! ~/.vim_session <CR>
-map <F3> :source ~/.vim_session <CR>
 
 ""make search highlights less painfull on the eyes
 "hi Search cterm=NONE ctermfg=grey ctermbg=blue
@@ -427,7 +421,6 @@ autocmd BufRead,BufNewFile   *.txt setl tw=79
 autocmd BufRead,BufNewFile   *.txt setl fo=aw2tq
 
 "}}}
-"}}}
 "{{{Martin Brochhaus's .vimrc
 "{{{
 "========================================
@@ -435,15 +428,13 @@ autocmd BufRead,BufNewFile   *.txt setl fo=aw2tq
 " Presented at PyCon APAC 2012
 "========================================
 " Automatic reloading of .vimrc
-autocmd! bufwritepost .vimrc source %
+"autocmd! bufwritepost .vimrc source %
 
 
 " Better copy & paste
 " When you want to paste large blocks of code into vim, press F2 before you
 " paste. At the bottom you should see ``-- INSERT (paste) --``.
 
-"" set pastetoggle=<F2>
-"" set clipboard=unnamed
 
 
 " Mouse and backspace
@@ -473,8 +464,6 @@ inoremap <C-Z> <C-O>:update<CR>
 " Quick quit command
 "noremap <Leader>e :quit<CR>  " Quit current window
 "noremap <Leader>E :qa!<CR>   " Quit all windows
-nnoremap <leader>z ZZ
-nnoremap <leader>e ZZ
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " Every unnecessary keystroke that can be saved is good for your health :)
@@ -877,3 +866,68 @@ set laststatus=2
 "hi x254_Grey89 ctermfg=254 guifg=#e4e4e4 "rgb=228,228,228
 "hi x255_Grey93 ctermfg=255 guifg=#eeeeee "rgb=238,238,238
 "}}}
+" Arduino stuffs
+autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
+nnoremap q[ :cprev<cr>
+nnoremap q] :cnext<cr>
+
+function! JumpToCSS()
+  let id_pos = searchpos("id", "nb", line('.'))[1]
+  let class_pos = searchpos("class", "nb", line('.'))[1]
+
+  if class_pos > 0 || id_pos > 0
+    if class_pos < id_pos
+      execute ":vim '#".expand('<cword>')."' **/*.css"
+    elseif class_pos > id_pos
+      execute ":vim '.".expand('<cword>')."' **/*.css"
+    endif
+  endif
+endfunction
+
+function! JumpToCSSfatty()
+  let id_pos = searchpos("id", "nb", line('.'))[1]
+  let class_pos = searchpos("class", "nb", line('.'))[1]
+
+  if class_pos > 0 || id_pos > 0
+    if class_pos < id_pos
+      execute ":vim '#".expand('<cWORD>')."' **/*.css"
+    elseif class_pos > id_pos
+      execute ":vim '.".expand('<cWORD>')."' **/*.css"
+    endif
+  endif
+endfunction
+
+let $PAGER=''
+
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+
+nnoremap <2-leftmouse> za
+
+set linebreak
+
+nnoremap <leader>E :wa\|qa<cr>
+nnoremap <leader>e ZZ
+nnoremap <leader>sdf :source ~/.vimrc<cr>
+
+" fn keys=========================================
+" Update buffer from file
+"nnoremap <F1> :bufdo e!<cr>
+set pastetoggle=<F2>
+nnoremap <F3> "*p
+nnoremap <F4> :normal O<esc>O<esc>"=strftime("%c")<CR>Po<tab>
+nnoremap <F5> :colors wombat256mod<CR>
+nnoremap <F6> :colors mayansmoke<cr>
+nnoremap <F7> :call JumpToCSS()<CR>
+nnoremap <F8> :mksession! ~/.vim_session <CR>
+nnoremap <F9> :source ~/.vim_session <CR>
+"nnoremap <F10>
+"nnoremap <F11>
+
+nnoremap <leader>rb :call VimuxRunCommand("ls")<cr>

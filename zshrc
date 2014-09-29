@@ -22,7 +22,14 @@ alias gco='git checkout'
 alias ls..='ls ..'
 alias cd..='cd ..'
 alias gs="git status"
+
+# edit a certain file shortcuts
 alias vZ="vim ~/.zshrc"
+alias vN='vim ~/.bash_profile'
+alias vB='vim ~/.bashrc'
+alias vV='vim ~/.vimrc'
+alias vT="vim ~/.tmux.conf"
+
 alias ga="git add"
 
 alias ZZ="source ~/.zshrc"
@@ -54,10 +61,6 @@ alias ls='ls -G'
 alias tls='tmux ls'
 alias tmux='tmux -2'
 
-# edit a certain file shortcuts
-alias vN='vim ~/.bash_profile'
-alias vB='vim ~/.bashrc'
-alias vV='vim ~/.vimrc'
 
 # resource from ~/.bashrc so you dont have to logout and log back in
 alias BB='source ~/.bashrc'
@@ -233,13 +236,16 @@ alias xmnt='diskutil unmount /Users/nateargetsinger/rsync/e'
     #ls --color=auto -F --color=always -lhFrt;
     #tput cup 40 0;
 #}
-#function swap()         
-#{
-    #local TMPFILE=tmp.$$
-    #mv "$1" $TMPFILE
-    #mv "$2" "$1"
-    #mv $TMPFILE"$2"
-#}
+function swap()         
+{
+	# save you a lot of grief if this function messes up
+		cp "$1" "$1.inCaseOfCatastrophe"
+		cp "$2" "$2.inCaseOfCatastrophe"
+    local TMPFILE=swap.tmp.$$
+    mv "$1" "$TMPFILE"
+    mv "$2" "$1"
+    mv "$TMPFILE" "$2"
+}
 #}}}
 
 
@@ -341,3 +347,19 @@ show()
 alias cdm='/Users/nateargetsinger/485/proj1/admin/pa1/php/html'
 
 alias cd485='cd /Users/nateargetsinger/485/submitDir/pa1_8tdyc1h5mi'
+
+howtotmux() {
+echo "Some relevant commands:"
+echo "tmux new -s session_name"
+}
+alias tkill="tmux kill-server"
+
+backup() {
+	mkdir -p .bak
+	st=$(date "+%y.%m.%d-%H.%M")
+	for file in $@
+	do cp $file .bak/"$file"_"$st"
+	done
+}
+
+alias lsa
