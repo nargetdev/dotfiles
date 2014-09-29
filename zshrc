@@ -354,6 +354,10 @@ echo "tmux new -s session_name"
 }
 alias tkill="tmux kill-server"
 
+tma() {
+	tmux attach-session -t $1
+}
+
 backup() {
 	mkdir -p .bak
 	st=$(date "+%y.%m.%d-%H.%M")
@@ -362,4 +366,4 @@ backup() {
 	done
 }
 
-alias lsa
+alias lsa='ls -a'
