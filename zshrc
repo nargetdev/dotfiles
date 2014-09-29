@@ -16,11 +16,14 @@ alias cdv='cd ~/.vim'
 alias histgrep="history|grep "
 alias webify="ssh nargetde@nargetdev.com git pull"
 alias sshaso='ssh nargetde@nargetdev.com'
+
+# git stuff (Note: be carefull of compatability with oh-my-zsh git plugin)
 alias gpu="git push"
-gcomm() {
-	#echo "$1"
-	git commit -m "$1"
-}
+alias gcomm="git commit -m"
+#gcomm() {
+	##echo "$1"
+	#git commit -m "$1"
+#}
 alias gco='git checkout'
 alias ls..='ls ..'
 alias cd..='cd ..'
