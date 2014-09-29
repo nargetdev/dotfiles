@@ -17,7 +17,10 @@ alias histgrep="history|grep "
 alias webify="ssh nargetde@nargetdev.com git pull"
 alias sshaso='ssh nargetde@nargetdev.com'
 alias gpu="git push"
-alias gcm="git commit -m"
+gcm() {
+	#echo "$1"
+	#git commit -m "$1"
+}
 alias gco='git checkout'
 alias ls..='ls ..'
 alias cd..='cd ..'
@@ -42,7 +45,7 @@ alias CCC='make clean && make release && ./base < in.txt -m FASTTSP'
 alias testbase='make clean && make release && make inMST'
 
 # cd shortcuts
-alias cdd='cd ~/dotfiles'
+alias cdd='cd ~/.dotfiles'
 #alias cdm='cd /Users/nateargetsinger/dev/webDev/REVAMP_webProf'
 
 alias cdv='cd ~/.vim/bundle'

@@ -148,7 +148,7 @@ let mapleader=","
 
 ""Make it easy to escape.  Just press j twice, quickly.
 imap jj <esc>
-set timeout timeoutlen=300 ttimeoutlen=100
+set timeout timeoutlen=500 ttimeoutlen=500
 imap jk <esc>
 
 
@@ -417,8 +417,8 @@ no <expr> , MLv{prvft<#'Z'? tolower(prvft) : toupper(prvft)}(prvftc,1)
 "}}}
 "File type specific"{{{
 " For *.txt files vim automatically handles things like Word does
-autocmd BufRead,BufNewFile   *.txt setl tw=79
-autocmd BufRead,BufNewFile   *.txt setl fo=aw2tq
+autocmd BufRead,BufNewFile   *.md,*.txt setl tw=79
+autocmd BufRead,BufNewFile   *.md,*.txt setl fo=aw2tq
 
 "}}}
 "{{{Martin Brochhaus's .vimrc
@@ -870,6 +870,7 @@ set laststatus=2
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 nnoremap q[ :cprev<cr>
 nnoremap q] :cnext<cr>
+" ???
 
 function! JumpToCSS()
   let id_pos = searchpos("id", "nb", line('.'))[1]
@@ -925,8 +926,8 @@ nnoremap <F4> :normal O<esc>O<esc>"=strftime("%c")<CR>Po<tab>
 nnoremap <F5> :colors wombat256mod<CR>
 nnoremap <F6> :colors mayansmoke<cr>
 nnoremap <F7> :call JumpToCSS()<CR>
-nnoremap <F8> :mksession! ~/.vim_session <CR>
-nnoremap <F9> :source ~/.vim_session <CR>
+nnoremap <F8> :mksession! .vim_session <CR>
+nnoremap <F9> :source .vim_session <CR>
 "nnoremap <F10>
 "nnoremap <F11>
 
