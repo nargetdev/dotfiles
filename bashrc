@@ -268,3 +268,5 @@ function swap()
 
 export EDITOR=/usr/local/Cellar/macvim/7.4-72/MacVim.app/Contents/MacOS/Vim
 alias remake='make clean && make debug'
+alias cdm='cd /var/www/html/group45'
+alias ff='pwd && ls'

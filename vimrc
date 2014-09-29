@@ -877,3 +877,5 @@ set laststatus=2
 "hi x254_Grey89 ctermfg=254 guifg=#e4e4e4 "rgb=228,228,228
 "hi x255_Grey93 ctermfg=255 guifg=#eeeeee "rgb=238,238,238
 "}}}
+"au FileChangedShell * echo "Warning: File changed on disk"
+au CursorHold * checktime
