@@ -30,7 +30,7 @@ function git-unpushed {
 }
 
 function gitify {
-    status=$(git status 2>/dev/null | tail -n 1)
+    status=$(git status 2>/dev/null | head -n 1)
     if [[ $status == "" ]]
     then
         echo ""
