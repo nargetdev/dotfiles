@@ -12,8 +12,7 @@ alias cdm='cd /var/www/html/group45'
 # re-source this file
 alias BB='source ~/.bashrc'
 
-function git-branch-name
-{
+function git-branch-name {
 		echo $(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
 

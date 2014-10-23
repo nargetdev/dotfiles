@@ -39,10 +39,10 @@
 	Bundle 'nerdcommenter'
 	Bundle 'airblade/vim-gitgutter'
 	"Bundle 'majutsushi/tagbar'
-	"Bundle 'scrooloose/syntastic'
+	Bundle 'scrooloose/syntastic'
 
 	" Crucial, although occasionally problematic:
-	Bundle 'Valloric/YouCompleteMe'
+	"Bundle 'Valloric/YouCompleteMe'
 
 	" Unsure
 	Bundle 'Lokaltog/vim-easymotion'
