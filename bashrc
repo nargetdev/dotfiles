@@ -1,4 +1,5 @@
 alias edb="ed ~/.bashrc"
+
 alias gs="git status"
 
 alias sql='mysql -u group45 -p'
@@ -78,6 +79,7 @@ rc() {
 	echo "$1" >> ~/.bashrc
 	cat ~/.bashrc
 }
+
 alias cdm="cd /var/www/html/group45/admin"
 alias gs='git status'
 alias cdm='cd /var/www/html/group45/admin/pa2'
