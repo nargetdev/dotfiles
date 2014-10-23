@@ -1,9 +1,20 @@
-"To do list:
-"Implement proper if statement response 
-" README"{{{
-" 
-"}}}
+"README"{{{
+"Hello and welcome to my .vimrc file!  I've done the best I can to comment the
+"purpose of everything in here but if your still confused the vim
+"documentation is really fantastic! Type ':h whateveryouneedhelpwith' and vim's
+"got yo back!
+"Also please note than when you see _keystrokes_ it means that you type the 
+"keystrokes and not the underscores.
+"Note: Sometimes I use 'keystrokes' as well.
+"
+"Enjoi!
+"
+""}}} <-- That's a fold marker.  Use 'set foldmethod=marker' to utilize.
 "{{{Vundle
+" What follows is everything that the Vundle plugin uses. If you're not using 
+" vundle... well you should be.
+" $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -636,6 +647,7 @@ set laststatus=2
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
 "" set nofoldenable"}}}
 "}}}
+" Reference color palette.
 "{{{Colors
 "hi x016_Grey0 ctermfg=16 guifg=#000000 "rgb=0,0,0
 "hi x017_NavyBlue ctermfg=17 guifg=#00005f "rgb=0,0,95
@@ -878,5 +890,28 @@ set laststatus=2
 "hi x254_Grey89 ctermfg=254 guifg=#e4e4e4 "rgb=228,228,228
 "hi x255_Grey93 ctermfg=255 guifg=#eeeeee "rgb=238,238,238
 "}}}
+
 "au FileChangedShell * echo "Warning: File changed on disk"
 au CursorHold * checktime
+hi cursorline ctermbg=233
+hi cursorline guibg=#000000
+
+nnoremap <leader>s :w<cr>
+
+nnoremap <leader>e ZZ
+
+	"{{{ window resize
+
+	" fine adjust
+	nnoremap <up> <c-w>1+
+	nnoremap <down> <c-w>1-
+	nnoremap <left> <c-w>1<
+	nnoremap <right> <c-w>1>
+
+	" coarse adjust
+	nnoremap <s-up> <c-w>5+
+	nnoremap <s-down> <c-w>5-
+	nnoremap <s-left> <c-w>5<
+	nnoremap <s-right> <c-w>5>
+
+	"}}}
