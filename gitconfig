@@ -9,7 +9,7 @@
 [merge]
 	tool = vimdiff
 [core]
-	autocrlf = true
+	autocrlf = input
 	safecrlf = false
 [color]
 	ui = true

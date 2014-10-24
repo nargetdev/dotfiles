@@ -17,7 +17,7 @@
 	filetype off                  " required
 
 	" make vundle source from ssh not https
-	"let g:vundle_default_git_proto = 'git'
+	let g:vundle_default_git_proto = 'git'
 
 	" set the runtime path to include Vundle and initialize
 	set rtp+=~/.vim/bundle/vundle/
@@ -33,16 +33,16 @@
 	"{{{ Most crucial Bundles
 
 	Bundle 'The-NERD-tree'
+	Plugin 'The-NERD-Commenter'
 	Bundle 'Gundo'
 	Bundle 'Lokaltog/powerline'
 	Bundle 'tpope/vim-fugitive'
-	Bundle 'nerdcommenter'
 	Bundle 'airblade/vim-gitgutter'
 	"Bundle 'majutsushi/tagbar'
 	Bundle 'scrooloose/syntastic'
 
 	" Crucial, although occasionally problematic:
-	"Bundle 'Valloric/YouCompleteMe'
+	Bundle 'Valloric/YouCompleteMe'
 
 	" Unsure
 	Bundle 'Lokaltog/vim-easymotion'
@@ -51,9 +51,10 @@
 	"}}}
 
 	"{{{ Nice to haves
+	Plugin 'Rename'
 	Bundle 'minibufexpl.vim'
 	Bundle 'ctrlp.vim'
-	Bundle 'ShowMarks'
+	"Bundle 'ShowMarks'
 	"}}}
 
 	"{{{LandFill /// bundle formats
@@ -202,6 +203,11 @@ autocmd! bufwritepost .vimrc source %
 "}}}
 
 "{{{ Sensible - These should all be things most everybody wants
+" normal backspace functionality
+set backspace=2
+
+"don't comment lines after comment
+set formatoptions-=cro
 
 	"{{{ Line numbers
 	set number
@@ -224,6 +230,9 @@ set showcmd
 
 	" easy save and exits"{{{
 	nnoremap <leader>s :w<cr>
+	nnoremap <leader>S :wa<cr>
+
+
 	nnoremap <leader>e ZZ
 	nnoremap <leader>E :wa<cr>:qa<cr>"}}}
 
