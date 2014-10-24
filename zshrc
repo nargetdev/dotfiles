@@ -305,7 +305,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -373,3 +373,19 @@ backup() {
 }
 
 alias lsa='ls -a'
+alias edz='ed ~/.zshrc'
+alias cdm='cd /Users/nateargetsinger/485/pa3_8tdyc1h5mi
+'
+alias vadobe='vim ~/.notes.adobe.crit'
+
+alias show='defaults write com.apple.finder AppleShowAllFiles YES;
+killall Finder /System/Library/CoreServices/Finder.app'
+alias hide='defaults write com.apple.finder AppleShowAllFiles NO;
+killall Finder /System/Library/CoreServices/Finder.app'
+alias J='grep'
+alias G='grep'
+alias cdm='cd /Users/nateargetsinger/485/admin/pa4_8tdyc1h5mi'
+/Users/nateargetsinger/485/pa3_8tdyc1h5mi
+$d
+alias cdmap='cd /Users/nateargetsinger/485/pa3_8tdyc1h5mi
+'

@@ -922,7 +922,7 @@ nnoremap <leader>sdf :source ~/.vimrc<cr>
 "nnoremap <F1> :bufdo e!<cr>
 set pastetoggle=<F2>
 nnoremap <F3> "*p
-nnoremap <F4> :normal O<esc>O<esc>"=strftime("%c")<CR>Po<tab>
+nnoremap <F4> :normal O<esc>O---<esc>O<esc>"=strftime("%c")<CR>Po<tab>
 nnoremap <F5> :colors wombat256mod<CR>
 nnoremap <F6> :colors mayansmoke<cr>
 nnoremap <F7> :call JumpToCSS()<CR>
