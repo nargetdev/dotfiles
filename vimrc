@@ -10,7 +10,7 @@ filetype off                  " required
 " make vundle source from ssh not https
 let g:vundle_default_git_proto = 'git'
 
-" set the runtime path to include Vundle and initialize
+" set the runtime path to include Vundle andinitialize
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " alternatively, pass a path where Vundle should install bundles
@@ -19,106 +19,119 @@ call vundle#rc()
 
 " let Vundle manage Vundle, required
 Bundle 'gmarik/vundle'
-Bundle 'christoomey/vim-tmux-navigator'
+
+" Most Critical Vundles (MCV)"{{{
+Plugin 'Syntastic'
 Bundle 'Gundo'
+Bundle 'mattn/emmet-vim'
+Plugin 'The-NERD-Commenter'
+Plugin 'The-NERD-tree'
+Plugin 'fugitive.vim'
+Bundle 'Lokaltog/powerline'
+
+""}}}
+
+"Bundle 'christoomey/vim-tmux-navigator'
+"
+" How to"{{{
 " The following are examples of different formats supported.
 " Keep bundle commands between here and filetype plugin indent on.
 " scripts on GitHub repos
-Bundle 'tpope/vim-fugitive'
-Bundle 'ap/vim-css-color'
-Bundle 'Lokaltog/powerline'
-"Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'tpope/vim-rails.git'
+"Bundle 'tpope/vim-fugitive'
+"Bundle 'ap/vim-css-color'
+"Bundle 'Lokaltog/powerline'
+""Bundle 'Lokaltog/vim-easymotion'
+""Bundle 'tpope/vim-rails.git'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the r0ntimepath properly.
-"Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+""Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 " scripts from http://vim-scripts.org/vim/scripts.html
-Bundle 'Lucius'
-Bundle 'The-NERD-tree'
-Bundle 'css_color.vim'
-Bundle 'minibufexpl.vim'
-Bundle 'pbcopy.vim'
-Bundle 'vimux'
-Bundle 'Conque-Shell'
-Bundle 'ShowMarks'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'nerdcommenter'
-"Bundle 'vim-powerline'
-Bundle 'ctrlp.vim'
+"Bundle 'Lucius'
+"Bundle 'The-NERD-tree'
+"Bundle 'css_color.vim'
+"Bundle 'minibufexpl.vim'
+"Bundle 'pbcopy.vim'
+"Bundle 'vimux'
+"Bundle 'Conque-Shell'
+"Bundle 'ShowMarks'
+"Bundle 'Valloric/YouCompleteMe'
+"Bundle 'nerdcommenter'
+""Bundle 'vim-powerline'
+"Bundle 'ctrlp.vim'
 "Color Schemes
 "=============
-Bundle 'mayansmoke'
+"Bundle 'mayansmoke'
 "=============
-"Bundle 'L9'
-"Bundle 'FuzzyFinder'
+""Bundle 'L9'
+""Bundle 'FuzzyFinder'
 " scripts not on GitHub
-"Bundle 'git@github.com:vim-scripts/c.vim.git'
-"Bundle 'git://git.wincent.com/command-t.git'
+""Bundle 'git@github.com:vim-scripts/c.vim.git'
+""Bundle 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-"Bundle 'file:///home/gmarik/path/to/plugin'
+""Bundle 'file:///home/gmarik/path/to/plugin'
 " ...
 "
 " Jamie Plugins
-" Bundles (plugins)
-Bundle 'Lokaltog/vim-powerline'
+" "Bundles (plugins)
+"Bundle 'Lokaltog/vim-powerline'
 
 if v:version < 703 || !has('patch584')
-  Bundle 'tsaleh/vim-supertab'
+  "Bundle 'tsaleh/vim-supertab'
 else
-  Bundle 'Valloric/YouCompleteMe'
+  "Bundle 'Valloric/YouCompleteMe'
 endif
 
-Bundle 'airblade/vim-gitgutter'
-Bundle 'godlygeek/tabular'
-Bundle 'kien/ctrlp.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'matthias-guenther/hammer.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'python_match.vim'
-Bundle 'sjl/gundo.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'vim-scripts/file-line'
-Bundle 'vim-scripts/matchit.zip'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'phleet/vim-arcanist'
+"Bundle 'airblade/vim-gitgutter'
+"Bundle 'godlygeek/tabular'
+"Bundle 'kien/ctrlp.vim'
+"Bundle 'majutsushi/tagbar'
+"Bundle 'matthias-guenther/hammer.vim'
+"Bundle 'mileszs/ack.vim'
+"Bundle 'python_match.vim'
+"Bundle 'sjl/gundo.vim'
+"Bundle 'tpope/vim-fugitive'
+"Bundle 'tpope/vim-markdown'
+"Bundle 'tpope/vim-unimpaired'
+"Bundle 'vim-scripts/file-line'
+"Bundle 'vim-scripts/matchit.zip'
+"Bundle 'scrooloose/nerdtree'
+"Bundle 'scrooloose/syntastic'
+"Bundle 'phleet/vim-arcanist'
 
 " Language Support
-Bundle 'digitaltoad/vim-jade'
-Bundle 'groenewege/vim-less'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'nono/vim-handlebars'
-Bundle 'skammer/vim-css-color'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'wavded/vim-stylus'
-Bundle 'pangloss/vim-javascript'
+"Bundle 'digitaltoad/vim-jade'
+"Bundle 'groenewege/vim-less'
+"Bundle 'hail2u/vim-css3-syntax'
+"Bundle 'kchmck/vim-coffee-script'
+"Bundle 'nono/vim-handlebars'
+"Bundle 'skammer/vim-css-color'
+"Bundle 'derekwyatt/vim-scala'
+"Bundle 'wavded/vim-stylus'
+"Bundle 'pangloss/vim-javascript'"}}}
 
 " Color
-Bundle "Solarized"
-Bundle "altercation/vim-colors-solarized"
+"Bundle "Solarized"
+"Bundle "altercation/vim-colors-solarized"
 
 
 set t_Co=16
 set background=dark
-colorscheme solarized
-let g:solarized_termcolors=256
-let g:solarized_termcolors=16
+"colorscheme solarized
+"let g:solarized_termcolors=256
+"let g:solarized_termcolors=16
 
 filetype plugin indent on     " required
 "" To ignore plugin indent changes, instead use:
 ""filetype plugin on
 ""
 "" Brief help
-"" :BundleList          - list configured bundles
-"" :BundleInstall(!)    - install (update) bundles
-"" :BundleSearch(!) foo - search (or refresh cache first) for foo
-"" :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
+"" :"BundleList          - list configured bundles
+"" :"BundleInstall(!)    - install (update) bundles
+"" :"BundleSearch(!) foo - search (or refresh cache first) for foo
+"" :"BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
 "" j
 "" see :h vundle for more details or wiki for FAQ
-"" NOTE: comments after Bundle commands are not allowed.
+"" NOTE: comments after "Bundle commands are not allowed.
 "" Put your stuff after this line"}}}
 "{{{Nate Argetsinger's .vimrc
 "Always"{{{
@@ -461,7 +474,7 @@ autocmd! bufwritepost .vimrc source %
 " Bind nohl
 " Removes highlight of your last search
 " ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
-nnoremap <C-n> :nohl<CR>
+nnoremap <C-g> :nohl<CR>
 "vnoremap <C-n> :nohl<CR>
 
 
@@ -474,8 +487,6 @@ inoremap <C-Z> <C-O>:update<CR>
 " Quick quit command
 "noremap <Leader>e :quit<CR>  " Quit current window
 "noremap <Leader>E :qa!<CR>   " Quit all windows
-nnoremap <leader>z ZZ
-nnoremap <leader>e ZZ
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " Every unnecessary keystroke that can be saved is good for your health :)
@@ -880,3 +891,40 @@ set laststatus=2
 "}}}
 "au FileChangedShell * echo "Warning: File changed on disk"
 au CursorHold * checktime
+
+" Resize
+
+"  nnoremap <right> :horrizontal resize -5
+" nnoremap <left> :horrizontal resize -5
+"nnoremap <s-left> ^w5>
+"nnoremap <s-right> ^w5<
+
+"nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+"nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+
+nnoremap <left> :vertical resize -3<cr>
+nnoremap <right> :vertical resize +3<cr>
+"map <left> <c-w>3< 
+"map <right> <c-w>3>
+map <up> <c-w>3+
+map <down> <c-w>3-
+
+" Buf write, leave, delete stuffs
+nnoremap <leader>E :wa\|qa<cr>
+"nnoremap <leader>e :w\|bd<cr>
+nnoremap <leader>e :quit<cr>
+nnoremap <leader>s :w<cr>
+
+
+nnoremap <leader>res :source ~/.vimrc<cr>
+
+" reverse prev/next position mapping
+"nnoremap <c-i> <c-o>
+"nnoremap <c-o> <c-i>
+
+" doesn't seem to work
+nmap <S-CR> O<Esc>
+nmap <CR> o<Esc>
+
+nnoremap <c-y> 2<c-y>
+nnoremap <c-e> 2<c-e>

@@ -78,3 +78,9 @@ rc() {
 alias cdm="cd /var/www/html/group45/admin"
 alias gs='git status'
 alias cdm='cd /var/www/html/group45/admin/pa2'
+alias edb="ed ~/.bashrc"
+alias edv="ed ~/.vimrc"
+alias cdm='cd /var/www/html/group45/admin/pa2/php/html'
+
+
+export PATH=$PATH:~/usr/bin
