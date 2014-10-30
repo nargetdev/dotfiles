@@ -10,10 +10,13 @@ if [ $# -eq 0 ]; then
 	echo "Your options are:"
 	echo "bashrc --> $ ln -s $DIR/bashrc ~/.bashrc"
 	echo
-	echo "vimrc  --> $ ln -s $DIR/vimrc  ~/.vimrc"
+	echo "vimrc  --> $ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+	echo "           $ ln -s $DIR/vimrc  ~/.vimrc"
 	echo
 	echo "wombat --> $ mkdir -p ~/.vim/colors"
 	echo "           $ curl 'http://www.vim.org/scripts/download_script.php?src_id=13400' > ~/.vim/colors/wombat256mod.vim"
+	echo
+	echo "gitconfig --> $ ln -s $DIR/gitconfig ~/.gitconfig"
 	echo
 	echo "Example:"
 	echo "$ ./setup.sh bashrc wombat vimrc"
@@ -32,12 +35,26 @@ do
 		if [ $? -eq 0 ]; then echo "Success!"
 		fi
 
-	elif [ "$var" = "vimrc" ]; then
+	elif [ "$var" = "gitconfig" ]; then
 		echo
-		echo "Symlinking vimrc..."
-		ln -s $DIR/vimrc ~/.vimrc
+		echo "Symlinking gitconfig..."
+		ln -s $DIR/gitconfig ~/.gitconfig
 
 		if [ $? -eq 0 ]; then echo "Success!"
+		fi
+
+	elif [ "$var" = "vimrc" ]; then
+		echo
+		echo "1) Symlinking vimrc..."
+		ln -s $DIR/vimrc ~/.vimrc
+		if [ $? -eq 0 ]; then echo "Success!"
+		fi
+
+		echo "2) Installing vundle..."
+		git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+		if [ $? -eq 0 ]; then echo "Success!"
+		else
+			echo "Perhaps you already have vundle?"
 		fi
 
 	elif [ "$var" = "wombat" ]; then

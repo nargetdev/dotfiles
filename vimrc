@@ -20,41 +20,45 @@
 	let g:vundle_default_git_proto = 'git'
 
 	" set the runtime path to include Vundle and initialize
-	set rtp+=~/.vim/bundle/vundle/
-	call vundle#rc()
+	set rtp+=~/.vim/bundle/Vundle.vim
+	call vundle#begin()
 	" alternatively, pass a path where Vundle should install bundles
 	"let path = '~/some/path/here'
 	"call vundle#rc(path)
 
 	" let Vundle manage Vundle, required
-	Bundle 'gmarik/vundle'
+	Plugin 'gmarik/Vundle.vim'
 	"}}}
 
 	"{{{ Most crucial Bundles
 
-	Bundle 'The-NERD-tree'
+	Plugin 'The-NERD-tree'
 	Plugin 'The-NERD-Commenter'
-	Bundle 'Gundo'
-	Bundle 'Lokaltog/powerline'
-	Bundle 'tpope/vim-fugitive'
-	Bundle 'airblade/vim-gitgutter'
-	"Bundle 'majutsushi/tagbar'
-	Bundle 'scrooloose/syntastic'
+	Plugin 'Gundo'
+	Plugin 'tpope/vim-fugitive'
+	Plugin 'airblade/vim-gitgutter'
+	Plugin 'majutsushi/tagbar'
+	Plugin 'unite.vim'
 
 	" Crucial, although occasionally problematic:
-	Bundle 'Valloric/YouCompleteMe'
+	Plugin 'Valloric/YouCompleteMe'
+	"Plugin 'powerline'
+
+	" These are lightweight (and fantastic) alternatives to the above
+	Plugin 'scrooloose/syntastic'
+	Plugin 'bling/vim-airline'
 
 	" Unsure
-	Bundle 'Lokaltog/vim-easymotion'
-	"Bundle 'L9'
-	"Bundle 'FuzzyFinder'
+	Plugin 'Lokaltog/vim-easymotion'
+	"Plugin 'L9'
+	"Plugin 'FuzzyFinder'
 	"}}}
 
 	"{{{ Nice to haves
 	Plugin 'Rename'
-	Bundle 'minibufexpl.vim'
-	Bundle 'ctrlp.vim'
-	"Bundle 'ShowMarks'
+	Plugin 'minibufexpl.vim'
+	Plugin 'ctrlp.vim'
+	"Plugin 'ShowMarks'
 	"}}}
 
 	"{{{LandFill /// bundle formats
@@ -136,6 +140,7 @@
 	"}}}
 
 	"{{{Plugin closure
+	call vundle#end()
 	filetype plugin indent on     " required
 	"" To ignore plugin indent changes, instead use:
 	""filetype plugin on
@@ -154,7 +159,7 @@
 "}}}
 
 " do i need this?
-call pathogen#infect()
+" call pathogen#infect()
 
 "{{{ Color
 	" In case using in terminal.
@@ -231,6 +236,10 @@ set showcmd
 	" easy save and exits"{{{
 	nnoremap <leader>s :w<cr>
 	nnoremap <leader>S :wa<cr>
+
+	" This allows you to type :W and get a write.
+	" NOTE: This will cause problems with any command with a 'W'
+	cmap W w
 
 
 	nnoremap <leader>e ZZ
@@ -316,8 +325,13 @@ set pastetoggle=<F10>
 
 "}}}
 
+nnoremap <c-y> 2<c-y>
+nnoremap <c-e> 2<c-e>
+
 " Execute a command;
-nnoremap <c-c> :!
+"nnoremap <c-c> :!
+"nnoremap <c-c> :SyntasticCheck<cr>
+
 
 " Make search case insensitive
 set hlsearch
