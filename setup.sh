@@ -12,6 +12,10 @@ if [ $# -eq 0 ]; then
 	echo
 	echo "vimrc  --> $ ln -s $DIR/vimrc  ~/.vimrc"
 	echo
+
+	echo "zshrc  --> $ ln -s $DIR/zshrc  ~/.zshrc"
+	echo
+
 	echo "wombat --> $ mkdir -p ~/.vim/colors"
 	echo "           $ curl 'http://www.vim.org/scripts/download_script.php?src_id=13400' > ~/.vim/colors/wombat256mod.vim"
 	echo
@@ -36,6 +40,14 @@ do
 		echo
 		echo "Symlinking vimrc..."
 		ln -s $DIR/vimrc ~/.vimrc
+
+		if [ $? -eq 0 ]; then echo "Success!"
+		fi
+
+	elif [ "$var" = "zshrc" ]; then
+		echo
+		echo "Symlinking zshrc..."
+		ln -s $DIR/zshrc ~/.zshrc
 
 		if [ $? -eq 0 ]; then echo "Success!"
 		fi
