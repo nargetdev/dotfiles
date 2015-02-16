@@ -11,6 +11,9 @@ if [ $# -eq 0 ]; then
 	echo "bashrc --> $ ln -s $DIR/bashrc ~/.bashrc"
 	echo
 	echo "vimrc  --> $ ln -s $DIR/vimrc  ~/.vimrc"
+
+	echo "mkdir -p ~/.vim/colors && cd ~/.vim/colors"
+	echo "wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400"
 	echo
 
 	echo "zshrc  --> $ ln -s $DIR/zshrc  ~/.zshrc"
@@ -40,6 +43,10 @@ do
 		echo
 		echo "Symlinking vimrc..."
 		ln -s $DIR/vimrc ~/.vimrc
+
+		echo "Getting Wombat color scheme..."
+		mkdir -p ~/.vim/colors && cd ~/.vim/colors
+        wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
 
 		if [ $? -eq 0 ]; then echo "Success!"
 		fi
