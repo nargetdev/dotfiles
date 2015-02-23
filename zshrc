@@ -32,6 +32,9 @@ declare -i COUNT=0
 				elif [ "$STATE" = "yellow" ]
 				then
 					play /Users/nate_argetsinger/Music/MUSI/4A\ -\ 146\ -\ Always\ \(Wave\ Racer\ Remix\).mp3
+				elif [ "$STATE" = "cyan" ]
+				then
+					say cole is such a sexy motherfucker.  I may be just a box but dont underestimate me.  I can spot one of them boom boom pow boom blau when I see one.
 				else
 					echo "We're not green, we are $STATE"
 				fi
@@ -51,6 +54,7 @@ export PATH=/opt/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 #{{{alias
 # eecs 485 shortcuts
 alias orange='ssh nargetde@nargetdev.com'
+alias orangeDNSfailure='ssh nargetde@143.95.42.94'
 alias cdm='cd /Users/nateargetsinger/485/proj1'
 alias ssh485='ssh narget@eecs485-05.eecs.umich.edu'
 alias 485machine="echo \"narget@eecs485-05.eecs.umich.edu\""
@@ -160,6 +164,9 @@ echo "alias cdm='cd `pwd`'" >> ~/.zshrc
 }
 function update445 () {
 echo "alias cd445='cd `pwd`'" >> ~/.zshrc
+}
+function update484 () {
+echo "alias cd484='cd `pwd`'" >> ~/.zshrc
 }
 
 function newalias () {
@@ -358,7 +365,7 @@ show()
 }
 alias cdm='/Users/nateargetsinger/485/proj1/admin/pa1/php/html'
 
-alias cd485='cd /Users/nateargetsinger/485/submitDir/pa1_8tdyc1h5mi'
+#alias cd485='cd /Users/nateargetsinger/485/submitDir/pa1_8tdyc1h5mi'
 
 howtotmux() {
 echo "Some relevant commands:"
@@ -481,3 +488,6 @@ DEFAULT_USER=`whoami`
 
 alias light="echo -e \"\033]50;SetProfile=Light\a\""
 alias dark="echo -e \"\033]50;SetProfile=Dark\a\""
+
+
+setopt extended_glob
