@@ -476,7 +476,7 @@ set noswapfile
 	"" \1 \2 \3 : go to buffer 1/2/3 etc
 	nnoremap <Leader>l :ls<CR>
 	nnoremap <Leader>b :bp<CR>
-	nnoremap <Leader>f :bn<CR>
+	nnoremap <Leader>v :bn<CR>
 	nnoremap <Leader>g :e#<CR>
 	nnoremap <Leader>1 :1b<CR>
 	nnoremap <Leader>2 :2b<CR>
@@ -886,3 +886,6 @@ nnoremap <c-s> :Unite neobundle/search
 set wrap linebreak nolist
 
 set autoread
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
