@@ -289,3 +289,43 @@ function swap()
     mv "$2" "$1"
     mv "$TMPFILE" "$2"
 }
+
+function snap(){
+git commit -am "${1}"
+}
+
+# copy asset(s) to website directory
+# usage: web source_file(s) directory_relative_to_root_of_web_directory
+function web () {
+cp -i $*[1,-2] /Users/nate_argetsinger/dev/web/startbootstrap-agency/${@[$#]}
+}
+
+function newcd () {
+	echo "alias cd$1='cd `pwd`'" >> ~/.cd_alias
+}
+function cdnew () {
+	echo "alias cd$1='cd `pwd`'" >> ~/.cd_alias
+}
+source ~/.cd_alias
+
+
+function updatecdm () {
+echo "alias cdm='cd `pwd`'" >> ~/.cd_alias
+}
+
+function newalias () {
+	echo "Handle?"
+	read handle
+	echo "Command?"
+	read cmd
+	echo "alias $handle='$cmd'">>~/.zshrc
+}
+
+function addapp(){
+	cp -r `pbpaste` /Applications
+	echo "Coppied `pbpaste` to my apps!"
+}
+
+function cc(){
+	git clone `pbpaste`
+}
