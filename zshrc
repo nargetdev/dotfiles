@@ -1,3 +1,5 @@
+export PATH=$PATH:/Users/tanedev/Google\ Drive/bin
+
 # ALIAS
 
     # MODIFYING CONFIG
@@ -15,7 +17,7 @@ alias cda='cd /Users/nateargetsinger/Dropbox/sActive\ Projects/REVAMP_webProf'
 alias cdv='cd ~/.vim'
 alias histgrep="history|grep "
 alias webify="ssh nargetde@nargetdev.com git pull"
-alias sshaso='ssh nargetde@nargetdev.com'
+alias orange='ssh nargetde@nargetdev.com'
 
 # git stuff (Note: be carefull of compatability with oh-my-zsh git plugin)
 alias gpu="git push"
@@ -52,17 +54,8 @@ alias cdd='cd ~/.dotfiles'
 #alias cdm='cd /Users/nateargetsinger/dev/webDev/REVAMP_webProf'
 
 alias cdv='cd ~/.vim/bundle'
-alias cd281='cd ~/Desktop/281'
-alias cd314='cd ~/Desktop/314'
-alias cd395='cd ~/Desktop/395'
-alias cd455='cd ~/Desktop/455'
-alias cdsync='cd ~/eecs/281market/syncDir'
-alias myproj='cd ~/eecs/281market'
 
-alias Xsync='sshfs narget@login.engin.umich.edu:e/p3 /Users/nateargetsinger/eecs/281market/syncDir'
-#alias Xsync='sshfs narget@login.engin.umich.edu:/afs/umich.edu/user/n/a/narget/e/p3 /Users/nateargetsinger/eecs/281market'
-alias nosync='umount /Users/nateargetsinger/eecs/281market'
- #alias nosync='diskutil unmount ~/eecs/p3'
+
 alias ls='ls -G'
 alias tls='tmux ls'
 alias tmux='tmux -2'
@@ -87,9 +80,6 @@ alias xmnt='diskutil unmount /Users/nateargetsinger/rsync/e'
 alias mypath="echo $PATH"
 alias howbig='du -hs'
 
-alias cdm='/Users/nateargetsinger/485/proj1/admin/pa1/php/html'
-
-alias cd485='cd /Users/nateargetsinger/485/submitDir/pa1_8tdyc1h5mi'
 
 alias tkill="tmux kill-server"
 
@@ -104,6 +94,9 @@ alias hide='defaults write com.apple.finder AppleShowAllFiles NO;
 killall Finder /System/Library/CoreServices/Finder.app'
 
 alias G='grep'
+alias cd..='cd ..'
+alias cd...='cd ../..'
+alias cd....='cd ../../..'
 
 
 #                FUNCTION
@@ -308,6 +301,10 @@ function cdnew () {
 }
 source ~/.cd_alias
 
+function b_cask_install () {
+    brew cask install $1 | tee ~/config/ansible/.tee.cask
+}
+
 
 function updatecdm () {
 echo "alias cdm='cd `pwd`'" >> ~/.cd_alias
@@ -329,3 +326,10 @@ function addapp(){
 function cc(){
 	git clone `pbpaste`
 }
+
+
+
+
+
+
+export PGHOST=eecs484.eecs.umich.edu

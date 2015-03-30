@@ -1,10 +1,18 @@
-" This is needed so that mvim knows about powerline"
+" Easy buffer navigation
+" mnemonic: c-buffer+c-forward c-buffer+c-backward
+nnoremap <c-b><c-f> :bn<cr>
+nnoremap <c-b><c-b> :bp<cr>
+
+colorscheme Monokai-chris
+
+" This is needed so that mvim knows about powerline fonts
 set guifont=Inconsolata\ for\ Powerline:h14
 
 inoremap jj <esc>
 
 nnoremap <leader>ee :wq<cr>
 nnoremap <leader>E :wa<cr>:qa<cr>
+nnoremap <leader>d :Bclose<cr>
 nnoremap <leader>d :bd<cr>
 
 set laststatus=2
@@ -13,6 +21,7 @@ let g:airline_powerline_fonts = 1
 nnoremap <2-leftmouse> za
 
 
+"WINDOW RESIZE
 " fine adjust
 nnoremap <up> <c-w>1+
 nnoremap <down> <c-w>1-
@@ -90,7 +99,26 @@ set noswapfile
 	nnoremap <Leader>9 :9b<CR>
 	nnoremap <Leader>0 :10b<CR>
 
+"COMMAND ALIAS
+"Command alias in case you desire to have tabs instead of spaces"
+cnoreabbrev tabular set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
+"Scratch that"
+cnoreabbrev notab set tabstop=4 shiftwidth=4 expandtab
+
+cnoreabbrev resource source ~/config/dotfiles/vimconf_light/vimrc
+
+"remove trailing whitespace
+cnoreabbrev trailing %s/\s\+$//
 
 "DUMP
 nnoremap <c-e> :Errors<cr>
 nnoremap <c-g> :nohl<cr>
+
+"Mysource"
+source ~/config/dotfiles/vimconf_light/vim_local_extras/Bdelete.vim
+
+
+nnoremap <F4> O<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
+
+set formatoptions+=w
+set tw=80
