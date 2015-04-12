@@ -107,6 +107,8 @@ cnoreabbrev notab set tabstop=4 shiftwidth=4 expandtab
 
 cnoreabbrev resource source ~/config/dotfiles/vimconf_light/vimrc
 
+cnoreabbrev reindent %!astyle
+
 "remove trailing whitespace
 cnoreabbrev trailing %s/\s\+$//
 
@@ -122,3 +124,4 @@ nnoremap <F4> O<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
 
 set formatoptions+=w
 set tw=80
+

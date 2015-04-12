@@ -1,6 +1,9 @@
 export PATH=$PATH:/Users/tanedev/Google\ Drive/bin
 
 # ALIAS
+#
+alias ncaen='narget@login.engin.umich.edu'
+alias wipi='ssh pi@10.0.0.6'
 
     # MODIFYING CONFIG
     alias mz='mvim ~/config/dotfiles/zshrc'
@@ -284,6 +287,7 @@ function swap()
 }
 
 function snap(){
+git add -A
 git commit -am "${1}"
 }
 
@@ -302,7 +306,7 @@ function cdnew () {
 source ~/.cd_alias
 
 function b_cask_install () {
-    brew cask install $1 | tee ~/config/ansible/.tee.cask
+    brew cask install --appdir=/Applications/ $1 | tee ~/config/ansible/.tee.cask
 }
 
 
@@ -327,6 +331,9 @@ function cc(){
 	git clone `pbpaste`
 }
 
+function br_install () {
+brew install $1 | tee ~/config/ansible/.tee.brew
+}
 
 
 
