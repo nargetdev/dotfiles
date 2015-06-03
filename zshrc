@@ -2,6 +2,8 @@ export PATH=$PATH:/Users/tanedev/Google\ Drive/bin
 
 # ALIAS
 #
+alias pissh='ssh pi@10.0.0.9'
+alias msite='mvim /Users/tanedev/ddev/web/mysite'
 alias ncaen='narget@login.engin.umich.edu'
 alias wipi='ssh pi@10.0.0.6'
 
@@ -298,10 +300,20 @@ cp -i $*[1,-2] /Users/nate_argetsinger/dev/web/startbootstrap-agency/${@[$#]}
 }
 
 function newcd () {
-	echo "alias cd$1='cd `pwd`'" >> ~/.cd_alias
+    if [ $# -eq 0 ]
+      then
+        echo "No arguments supplied"
+    else
+        echo "alias cd$1='cd `pwd`'" >> ~/.cd_alias
+    fi
 }
 function cdnew () {
-	echo "alias cd$1='cd `pwd`'" >> ~/.cd_alias
+    if [ $# -eq 0 ]
+      then
+        echo "No arguments supplied"
+    else
+        echo "alias cd$1='cd `pwd`'" >> ~/.cd_alias
+    fi
 }
 source ~/.cd_alias
 
@@ -335,8 +347,8 @@ function br_install () {
 brew install $1 | tee ~/config/ansible/.tee.brew
 }
 
-
-
-
+function cd {
+    builtin cd "$@" && ls -F
+}
 
 export PGHOST=eecs484.eecs.umich.edu
