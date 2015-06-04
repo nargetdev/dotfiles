@@ -1,0 +1,2 @@
+rmdir config/dotfiles/.config_cache
+sudo apt-get install libbluetooth-dev

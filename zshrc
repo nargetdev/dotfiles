@@ -3,17 +3,14 @@ export PATH=$PATH:/Users/tanedev/Google\ Drive/bin
 # ALIAS
 #
 alias pissh='ssh pi@10.0.0.9'
-alias msite='mvim /Users/tanedev/ddev/web/mysite'
 alias ncaen='narget@login.engin.umich.edu'
 alias wipi='ssh pi@10.0.0.6'
 
     # MODIFYING CONFIG
-    alias mz='mvim ~/config/dotfiles/zshrc'
     alias cdd='cd ~/config/dotfiles/'
     alias cda='cd ~/config/ansible/'
 
 
-alias vim='mvim -v'
 alias vi='vim -u NONE'
 
 alias va='vim ~/.acc.excess'
@@ -38,9 +35,11 @@ alias gs="git status"
 
 # edit a certain file shortcuts
 alias vZ="vim ~/.zshrc"
+alias vz="vim ~/config/dotfiles/zshrc"
 alias vN='vim ~/.bash_profile'
 alias vB='vim ~/.bashrc'
 alias vV='vim ~/.vimrc'
+alias vv='vim ~/config/dotfiles/vimrc'
 alias vT="vim ~/.tmux.conf"
 
 alias ga="git add"
@@ -61,7 +60,7 @@ alias cdd='cd ~/.dotfiles'
 alias cdv='cd ~/.vim/bundle'
 
 
-alias ls='ls -G'
+#alias ls='ls -G'
 alias tls='tmux ls'
 alias tmux='tmux -2'
 
@@ -352,3 +351,13 @@ function cd {
 }
 
 export PGHOST=eecs484.eecs.umich.edu
+
+function ralias () {
+    mkdir -p ~/config/dotfiles/.alias_cache
+    echo "alias $1=\"history|tail -n 1|sed 's/\s\s[0-9]*\s\s//'\"" >> ~/config/dotfiles/.alias_cache
+}
+
+function rconf () {
+    touch ~/config/dotfiles/.config_cache
+    echo "`history|tail -n 1|sed 's/\s\s[0-9]*\s\s//'`" >> ~/config/dotfiles/.config_cache
+}
