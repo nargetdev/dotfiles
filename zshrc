@@ -1,4 +1,6 @@
-export PATH=$PATH:/Users/tanedev/Google\ Drive/bin
+
+export PATH=$PATH:/Users/tanedev/Google\ Drive/bin:/Users/tanedev/ddev/toolchain/gcc-arm-none-eabi-4_9-2015q1
+
 
 # ALIAS
 #
@@ -20,7 +22,7 @@ alias va='vim ~/.acc.excess'
 #
 alias cda='cd /Users/nateargetsinger/Dropbox/sActive\ Projects/REVAMP_webProf'
 alias cdv='cd ~/.vim'
-alias histgrep="history|grep "
+alias hgrep="history|grep "
 alias webify="ssh nargetde@nargetdev.com git pull"
 alias orange='ssh nargetde@nargetdev.com'
 
@@ -352,3 +354,5 @@ function cd {
 }
 
 export PGHOST=eecs484.eecs.umich.edu
+
+export PATH=$PATH:/opt/vertica/bin
