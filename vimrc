@@ -1,3 +1,4 @@
+"This level of compatability level should work everywhere
 if (compatability_level >= 0)
 	"echo "adding base line config"
     inoremap jj <esc>
@@ -98,7 +99,7 @@ endif
 
 
 if (compatability_level >= 2)
-    echo "in we go"
+    "echo "in we go"
 else
     echo "we didn't enter here"
 endif
@@ -119,6 +120,7 @@ endif
 
 if ( 1 == 2  )
 
+    echo "never see this"
 
 "Hello and welcome to my .vimrc file!
 "Enjoi!
