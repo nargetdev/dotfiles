@@ -1,0 +1,3 @@
+alias msite='mvim /Users/tanedev/ddev/web/mysite'
+    alias mz='mvim ~/config/dotfiles/zshrc'
+alias vim='mvim -v'

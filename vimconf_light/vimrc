@@ -125,3 +125,4 @@ nnoremap <F4> O<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
 set formatoptions+=w
 set tw=80
 
+set nospell
