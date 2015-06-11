@@ -1,3 +1,4 @@
+alias vim="nvim" # neovim for the win
 
 export PATH=$PATH:/Users/tanedev/Google\ Drive/bin:/Users/tanedev/ddev/toolchain/gcc-arm-none-eabi-4_9-2015q1
 

@@ -1,3 +1,125 @@
+if (compatability_level >= 0)
+	"echo "adding base line config"
+    inoremap jj <esc>
+
+ "Cocoa/Emacs style insert mode"{{{
+" If on macvim take advantage of option key as meta.
+" TODO: figure out a way to meta-ize option key on other platforms.
+if has("gui_macvim")
+	set macmeta
+endif
+
+imap <C-b> <Left>
+imap <C-f> <Right>
+imap <C-a> <C-o>:call <SID>home()<CR>
+imap <C-e> <End>
+imap <M-b> <C-o>b
+imap <M-f> <C-o>e<Right>
+imap <C-d> <Del>
+imap <C-h> <BS>
+imap <M-d> <C-o>de
+imap <M-h> <C-w>
+imap <C-k> <C-r>=<SID>kill_line()<CR>
+imap <C-p> <Up>
+imap <C-n> <Down>
+
+" command line mode
+"cmap <C-p> <Up>     "I like the previous command,
+"cmap <C-n> <Down>   "next command funcionality.
+cmap <C-b> <Left>
+cmap <C-f> <Right>
+cmap <C-a> <Home>
+cmap <C-e> <End>
+cmap <M-b> <S-Left>
+cmap <M-f> <S-Right>
+cnoremap <C-d> <Del>
+cnoremap <C-h> <BS>
+cnoremap <M-d> <S-Right><C-w>
+cnoremap <M-h> <C-w>
+cnoremap <C-k> <C-f>D<C-c><C-c>:<Up>
+
+
+function! s:home()
+	let start_col = col('.')
+	normal! ^
+	if col('.') == start_col
+		normal! 0
+	endif
+	return ''
+endfunction
+
+function! s:kill_line()
+	let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
+	if len(text_after_cursor) == 0
+		normal! J
+	else
+		call setline(line('.'), text_before_cursor)
+	endif
+	return ''
+endfunction
+
+	function! s:split_line_text_at_cursor()
+		let line_text = getline(line('.'))
+		let text_after_cursor  = line_text[col('.')-1 :]
+		let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
+		return [text_before_cursor, text_after_cursor]
+	endfunction"}}}
+"remove trailing whitespace
+cnoreabbrev trailing %s/\s\+$//
+
+nnoremap <F4> O<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
+endif
+
+if (compatability_level >= 1)
+	"echo "adding more config"
+" Disable stupid backup and swap files - they trigger too many events
+" for file system watchers
+set nobackup
+set nowritebackup
+set noswapfile
+
+"WINDOW RESIZE
+" fine adjust
+nnoremap <up> <c-w>1+
+nnoremap <down> <c-w>1-
+nnoremap <left> <c-w>1<
+nnoremap <right> <c-w>1>
+
+    set textwidth=79  " lines longer than 79 columns will be broken
+    set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
+    set tabstop=4     " a hard TAB displays as 4 columns
+    set expandtab     " insert spaces when hitting TABs
+    set softtabstop=4 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
+    set shiftround    " round indent to multiple of 'shiftwidth'
+    set autoindent    " align the new line indent with the previous line"
+
+    set listchars=tab:→\ ,eol:¬
+endif
+
+
+if (compatability_level >= 2)
+    echo "in we go"
+else
+    echo "we didn't enter here"
+endif
+
+if (compatability_level >= 3)
+    echo "we shouldn't get here"
+endif
+
+
+
+
+
+
+
+
+
+
+
+if ( 1 == 2  )
+
+
 "Hello and welcome to my .vimrc file!
 "Enjoi!
 "{{{ Prelude: Folding
@@ -889,3 +1011,5 @@ set autoread
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
+
+endif
