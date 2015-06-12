@@ -72,40 +72,63 @@ nnoremap <F4> O<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
 endif
 
 if (compatability_level >= 1)
-	"echo "adding more config"
-" Disable stupid backup and swap files - they trigger too many events
-" for file system watchers
-set nobackup
-set nowritebackup
-set noswapfile
+        "echo "adding more config"
+    " Disable stupid backup and swap files - they trigger too many events
+    " for file system watchers
+    set nobackup
+    set nowritebackup
+    set noswapfile
 
-"WINDOW RESIZE
-" fine adjust
-nnoremap <up> <c-w>1+
-nnoremap <down> <c-w>1-
-nnoremap <left> <c-w>1<
-nnoremap <right> <c-w>1>
+    "WINDOW RESIZE
+    " fine adjust
+    nnoremap <up> <c-w>1+
+    nnoremap <down> <c-w>1-
+    nnoremap <left> <c-w>1<
+    nnoremap <right> <c-w>1>
 
-    set textwidth=79  " lines longer than 79 columns will be broken
-    set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
-    set tabstop=4     " a hard TAB displays as 4 columns
-    set expandtab     " insert spaces when hitting TABs
-    set softtabstop=4 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
-    set shiftround    " round indent to multiple of 'shiftwidth'
-    set autoindent    " align the new line indent with the previous line"
+        set textwidth=79  " lines longer than 79 columns will be broken
+        set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
+        set tabstop=4     " a hard TAB displays as 4 columns
+        set expandtab     " insert spaces when hitting TABs
+        set softtabstop=4 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
+        set shiftround    " round indent to multiple of 'shiftwidth'
+        set autoindent    " align the new line indent with the previous line"
 
-    set listchars=tab:→\ ,eol:¬
+        set listchars=tab:→\ ,eol:¬
+    source ~/config/homebrewed_utilities/parse_note.vim
 endif
 
 
 if (compatability_level >= 2)
-    "echo "in we go"
+    "echo 'in we go'
+    cnoreabbrev resource source ~/config/dotfiles/vimrc
 else
-    echo "we didn't enter here"
+    echo 'we didnt enter here'
 endif
 
 if (compatability_level >= 3)
     echo "we shouldn't get here"
+"COMMAND ALIAS
+"Command alias in case you desire to have tabs instead of spaces"
+cnoreabbrev tabular set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
+"Scratch that"
+cnoreabbrev notab set tabstop=4 shiftwidth=4 expandtab
+
+
+cnoreabbrev reindent %!astyle
+
+"remove trailing whitespace
+cnoreabbrev trailing %s/\s\+$//
+
+"DUMP
+nnoremap <c-e> :Errors<cr>
+nnoremap <c-g> :nohl<cr>
+
+"Mysource"
+source ~/config/dotfiles/vimconf_light/vim_local_extras/Bdelete.vim
+
+
+nnoremap <F4> O<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
 endif
 
 
