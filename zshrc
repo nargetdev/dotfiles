@@ -1,3 +1,4 @@
+alias va='vim ~/.acc.excess'
 alias vim="nvim" # neovim for the win
 
 export PATH=$PATH:/Users/tanedev/Google\ Drive/bin:/Users/tanedev/ddev/toolchain/gcc-arm-none-eabi-4_9-2015q1
@@ -16,7 +17,6 @@ alias wipi='ssh pi@10.0.0.6'
 
 alias vi='vim -u NONE'
 
-alias va='vim ~/.acc.excess'
 #
 alias cda='cd /Users/nateargetsinger/Dropbox/sActive\ Projects/REVAMP_webProf'
 alias cdv='cd ~/.vim'
