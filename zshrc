@@ -1,5 +1,5 @@
 alias va='vim ~/.acc.excess'
-alias vim="nvim" # neovim for the win
+#alias vim="nvim" # neovim for the win
 
 export PATH=$PATH:/Users/tanedev/Google\ Drive/bin:/Users/tanedev/ddev/toolchain/gcc-arm-none-eabi-4_9-2015q1
 
@@ -355,6 +355,8 @@ function cd {
 
 export PGHOST=eecs484.eecs.umich.edu
 
+export SLIMERJSLAUNCHER=/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Contents/MacOS/firefox
+
 export PATH=$PATH:/opt/vertica/bin
 function ralias () {
     mkdir -p ~/config/dotfiles/.alias_cache
@@ -362,6 +364,10 @@ function ralias () {
 }
 
 function rconf () {
-    touch ~/config/dotfiles/.config_cache
-    echo "`history|tail -n 1|sed 's/\s\s[0-9]*\s\s//'`" >> ~/config/dotfiles/.config_cache
+	touch ~/config/dotfiles/.config_cache
+	echo "`history|tail -n 1|sed 's/\s\s[0-9]*\s\s//'`" >> ~/config/dotfiles/.config_cache
+}
+
+function chgrep () {
+	hgrep ${1}|tail -n2|head -n1|sed "s/^.\{7\}//"|pbcopy
 }

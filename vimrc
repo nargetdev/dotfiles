@@ -1,4 +1,4 @@
-"This level of compatability level should work everywhere
+"This level of compatability level should work everywhere {{{
 if (compatability_level >= 0)
 	"echo "adding base line config"
     inoremap jj <esc>
@@ -59,26 +59,59 @@ function! s:kill_line()
 	return ''
 endfunction
 
-	function! s:split_line_text_at_cursor()
-		let line_text = getline(line('.'))
-		let text_after_cursor  = line_text[col('.')-1 :]
-		let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
-		return [text_before_cursor, text_after_cursor]
-	endfunction"}}}
+function! s:split_line_text_at_cursor()
+	let line_text = getline(line('.'))
+	let text_after_cursor  = line_text[col('.')-1 :]
+	let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
+	return [text_before_cursor, text_after_cursor]
+endfunction "}}}
 "remove trailing whitespace
 cnoreabbrev trailing %s/\s\+$//
 
 nnoremap <F4> O<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
 endif
-
+"}}}
+" This level should not be used with IDEs but are necessary on headless nodes"{{{
 if (compatability_level >= 1)
-        "echo "adding more config"
+    "Terminal
+    nnoremap <c-t><c-t> :vsp term://zsh<cr>
+    nnoremap <leader>E :wa<cr>:qa<cr>
+
+    " AIRLINE STUFF
+" let g:airline_theme='dark'
+ "let g:airline_theme='powerlineish'
+" let g:airline_theme='simple'
+ "let g:airline_theme='tomorrow'
+"let g:airline_theme='wombat'
+" let g:airline_theme='molokai'
+ let g:airline_theme='badwolf'
+" let g:airline_theme='bubblegum'
+" let g:airline_theme='jellybeans'
+let g:airline_section_c=''
+let g:airline_section_x='[%{getcwd()}/]%f'
+let g:airline_section_y=''
+let g:airline_section_z=''
     " Disable stupid backup and swap files - they trigger too many events
     " for file system watchers
     set nobackup
     set nowritebackup
     set noswapfile
 
+    " Buffer stuff"{{{
+	nnoremap <Leader>b :bp<CR>
+	nnoremap <Leader>f :bn<CR>
+	nnoremap <Leader>g :e#<CR>
+	nnoremap <Leader>1 :1b<CR>
+	nnoremap <Leader>2 :2b<CR>
+	nnoremap <Leader>3 :3b<CR>
+	nnoremap <Leader>4 :4b<CR>
+	nnoremap <Leader>5 :5b<CR>
+	nnoremap <Leader>6 :6b<CR>
+	nnoremap <Leader>7 :7b<CR>
+	nnoremap <Leader>8 :8b<CR>
+	nnoremap <Leader>9 :9b<CR>
+	nnoremap <Leader>0 :10b<CR>
+    "}}}
     "WINDOW RESIZE
     " fine adjust
     nnoremap <up> <c-w>1+
@@ -96,20 +129,23 @@ if (compatability_level >= 1)
 
         set listchars=tab:→\ ,eol:¬
     source ~/config/homebrewed_utilities/parse_note.vim
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+    if has('nvim')
+        tnoremap <A-h> <C-\><C-n><C-w>h
+        tnoremap <A-j> <C-\><C-n><C-w>j
+        tnoremap <A-k> <C-\><C-n><C-w>k
+        tnoremap <A-l> <C-\><C-n><C-w>l
+        nnoremap <A-h> <C-w>h
+        nnoremap <A-j> <C-w>j
+        nnoremap <A-k> <C-w>k
+        nnoremap <A-l> <C-w>l
+    endif
 
-endif
+endif"}}}
 
 
 if (compatability_level >= 2)
-    "echo 'in we go'
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#show_buffers = 1
     cnoreabbrev resource source ~/config/dotfiles/vimrc
 else
     echo 'we didnt enter here'
@@ -632,7 +668,7 @@ set noswapfile
 	"" \1 \2 \3 : go to buffer 1/2/3 etc
 	nnoremap <Leader>l :ls<CR>
 	nnoremap <Leader>b :bp<CR>
-	nnoremap <Leader>v :bn<CR>
+	nnoremap <Leader>f :bn<CR>
 	nnoremap <Leader>g :e#<CR>
 	nnoremap <Leader>1 :1b<CR>
 	nnoremap <Leader>2 :2b<CR>
@@ -1043,7 +1079,5 @@ set wrap linebreak nolist
 
 set autoread
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 1
 
 endif
