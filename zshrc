@@ -48,7 +48,7 @@ alias vT="vim ~/.tmux.conf"
 alias ga="git add"
 
 alias ZZ="source ~/.zshrc"
-alias vj="vim ~/Documents/.notes.md"
+alias vj="nvim ~/Documents/.notes.md"
 
 
 
@@ -371,3 +371,5 @@ function rconf () {
 function chgrep () {
 	hgrep ${1}|tail -n2|head -n1|sed "s/^.\{7\}//"|pbcopy
 }
+
+DEFAULT_USER=tanedev
