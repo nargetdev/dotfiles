@@ -72,7 +72,15 @@ nnoremap <F4> O<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
 endif
 "}}}
 " This level should not be used with IDEs but are necessary on headless nodes"{{{
+
 if (compatability_level >= 1)
+
+" Disable stupid backup and swap files - they trigger too many events
+    " for file system watchers
+    set nobackup
+    set nowritebackup
+    set noswapfile
+
     "Terminal
     nnoremap <c-t><c-t> :vsp term://zsh<cr>
     nnoremap <leader>E :wa<cr>:qa<cr>
@@ -91,11 +99,6 @@ let g:airline_section_c=''
 let g:airline_section_x='[%{getcwd()}/]%f'
 let g:airline_section_y=''
 let g:airline_section_z=''
-    " Disable stupid backup and swap files - they trigger too many events
-    " for file system watchers
-    set nobackup
-    set nowritebackup
-    set noswapfile
 
     " Buffer stuff"{{{
 	nnoremap <Leader>b :bp<CR>
@@ -130,6 +133,8 @@ let g:airline_section_z=''
         set listchars=tab:→\ ,eol:¬
     source ~/config/homebrewed_utilities/parse_note.vim
     if has('nvim')
+        tnoremap <Esc> <C-\><C-n>
+
         tnoremap <A-h> <C-\><C-n><C-w>h
         tnoremap <A-j> <C-\><C-n><C-w>j
         tnoremap <A-k> <C-\><C-n><C-w>k
@@ -1081,3 +1086,4 @@ set autoread
 
 
 endif
+
