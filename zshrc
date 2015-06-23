@@ -115,11 +115,17 @@ tma() {
 	tmux attach-session -t $1
 }
 
-backup() {
+backup_hidden() {
 	mkdir -p .bak
 	st=$(date "+%y.%m.%d-%H.%M")
 	for file in $@
 	do cp $file .bak/"$file"_"$st"
+	done
+}
+backup() {
+	st=$(date "+%y.%m.%d-%H.%M")
+	for file in $@
+	do cp $file __"$st"_"$file"
 	done
 }
 #function cmdir(){
