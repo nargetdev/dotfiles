@@ -48,7 +48,7 @@ alias vT="vim ~/.tmux.conf"
 alias ga="git add"
 
 alias ZZ="source ~/.zshrc"
-alias vj="vim ~/Documents/.notes.md"
+alias vj="nvim ~/Documents/.notes.md"
 
 
 
@@ -423,3 +423,4 @@ DEFAULT_USER=`whoami`
 export SLIMERJSLAUNCHER=/usr/bin/firefox
 
 
+DEFAULT_USER=tanedev

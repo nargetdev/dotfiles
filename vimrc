@@ -143,6 +143,7 @@ let g:airline_section_z=''
         nnoremap <A-j> <C-w>j
         nnoremap <A-k> <C-w>k
         nnoremap <A-l> <C-w>l
+        nnoremap <A-S-l> :w<cr><C-w>la
     endif
 
 endif"}}}
