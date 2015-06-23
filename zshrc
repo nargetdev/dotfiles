@@ -1,10 +1,7 @@
 alias va='vim ~/.acc.excess'
 #alias vim="nvim" # neovim for the win
 
-export PATH=$PATH:/Users/tanedev/Google_Drive/bin:/Users/tanedev/ddev/toolchain/gcc-arm-none-eabi-4_9-2015q1/bin
-export PATH=$PATH:/opt/vertica/bin
-export PATH=$PATH:/opt/vertica/bin
-export PATH=$PATH:/media/psf/Home/Google_Drive/dev/toolchain/gcc-arm-none-eabi-4_9-2015q1/bin
+export PATH=$PATH:/opt/vertica/bin:/usr/local/gcc-arm-none-eabi-4_9-2015q1/bin
 
 
 # ALIAS
@@ -40,8 +37,8 @@ alias cd..='cd ..'
 alias gs="git status"
 
 # edit a certain file shortcuts
-alias vZ="nvim ~/.zshrc"
-alias vz="nvim ~/config/dotfiles/zshrc"
+alias vZ="vim ~/.zshrc"
+alias vz="vim ~/config/dotfiles/zshrc"
 alias vN='vim ~/.bash_profile'
 alias vB='vim ~/.bashrc'
 alias vV='vim ~/.vimrc'
@@ -395,6 +392,7 @@ if [[ "$unamestr" == 'Linux'  ]]; then
     function rebuild_nrf(){
         
         #cd $(find . -type d -name "_build")/..
+        NRF51_SDK=/media/psf/Home/Google_Drive/dev/nordic/nRF51_SDK_8.1.0
         make all
         SOFTDEVICE=$NRF51_SDK/components/softdevice/s110/hex/s110_softdevice.hex
         OUTPUT=_build/output.hex
@@ -404,6 +402,16 @@ if [[ "$unamestr" == 'Linux'  ]]; then
     }
     #ls *.ld|xargs -i cp {} {}.bak
     echo "yes"
+
+    function getpath(){
+        pwd|xclip
+    }
+    function putpath(){
+        `xclip -o`
+    }
+    function gopath(){
+        cd `xclip -o`
+    }
 else
     echo "not linux"
 fi
@@ -411,3 +419,7 @@ fi
 echo "included config"
 
 DEFAULT_USER=`whoami`
+
+export SLIMERJSLAUNCHER=/usr/bin/firefox
+
+
