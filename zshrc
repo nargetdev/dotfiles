@@ -401,7 +401,6 @@ if [[ "$unamestr" == 'Linux'  ]]; then
         cp $OUTPUT /media/$USER/MBED
     }
     #ls *.ld|xargs -i cp {} {}.bak
-    echo "yes"
 
     function getpath(){
         pwd|xclip
@@ -412,15 +411,24 @@ if [[ "$unamestr" == 'Linux'  ]]; then
     function gopath(){
         cd `xclip -o`
     }
+
+    echo "this is ubuntu - sourced according section"
 else
-    echo "not linux"
+    function getpath(){
+        pwd|pbcopy
+    }
+    function putpath(){
+        `pbpaste`
+    }
+    function gopath(){
+        cd `pbpaste`
+    }
+    echo "this is OS X - finished sourcing section"
 fi
 
-echo "included config"
 
 DEFAULT_USER=`whoami`
 
 export SLIMERJSLAUNCHER=/usr/bin/firefox
 
-
-DEFAULT_USER=tanedev
+echo "finished sourcing ~/env/dotfiles/zshrc"
