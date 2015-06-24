@@ -1,0 +1,3 @@
+[submodule "applescripts"]
+	path = applescripts
+	url = git@github.com:nargetdev/applescripts.git
