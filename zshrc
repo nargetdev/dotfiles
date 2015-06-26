@@ -418,6 +418,7 @@ if [[ "$unamestr" == 'Linux'  ]]; then
         cd `xclip -o`
     }
 
+	export SLIMERJSLAUNCHER=/usr/bin/firefox
     echo "this is ubuntu - sourced according section"
 else
     function getpath(){
@@ -429,12 +430,34 @@ else
     function gopath(){
         cd `pbpaste`
     }
+export SLIMERJSLAUNCHER=/Applications/Firefox.app/Contents/MacOS/firefox
     echo "this is OS X - finished sourcing section"
 fi
 
+function begin_install_log() {
+    if [ $# -eq 0 ]
+      then
+        echo "No arguments supplied"
+		HIST_NUM=""
+    else
+		HIST_NUM=$(history|tail -n 1|awk '{ print $1  }')
+		HIST_NUM=$((HIST_NUM + 2))
+		OUTPUT_FILE=$HOME/environment/ansible/.install_cache/${1}
+    fi
+}
+function capture_install_log() {
+if [ ! $HIST_NUM ]
+then
+	echo "run 'begin_install_log' first"
+else
+	history|grep -A999 $HIST_NUM|awk '{$1=""; print $0}' >> $OUTPUT_FILE
+	HIST_NUM=""
+fi
+}
 
 DEFAULT_USER=`whoami`
 
-export SLIMERJSLAUNCHER=/usr/bin/firefox
 
+### PATCH - TEMPORARY
+PATH=$PATH:$HOME/Google_Drive/util/slimerjs-0.9.6
 echo "finished sourcing ~/env/dotfiles/zshrc"
