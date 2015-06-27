@@ -37,8 +37,8 @@ alias cd..='cd ..'
 alias gs="git status"
 
 # edit a certain file shortcuts
-alias vZ="vim ~/.zshrc"
-alias vz="vim ~/config/dotfiles/zshrc"
+alias vZ="nvim ~/.zshrc"
+alias vz="nvim ~/environment/dotfiles/zshrc"
 alias vN='vim ~/.bash_profile'
 alias vB='vim ~/.bashrc'
 alias vV='vim ~/.vimrc'
@@ -460,4 +460,17 @@ DEFAULT_USER=`whoami`
 
 ### PATCH - TEMPORARY
 PATH=$PATH:$HOME/Google_Drive/util/slimerjs-0.9.6
-echo "finished sourcing ~/env/dotfiles/zshrc"
+echo "finished sourcing ~/environment/dotfiles/zshrc"
+HISTSIZE=999
+SAVEHIST=999
+
+alias neo='nvim'
+
+#GIT ALIAS
+alias gitnp='git --no-pager'
+alias gcam='git commit -am'
+
+
+export TERM_COLOR="dark"
+alias light="echo -e \"\033]50;SetProfile=Light\a\" && TERM_COLOR=light"
+alias dark="echo -e \"\033]50;SetProfile=Dark\a\" && TERM_COLOR=dark"

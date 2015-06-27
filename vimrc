@@ -1102,4 +1102,13 @@ if (compatability_level >= 2)
 
     autocmd FileType html imap <buffer><expr><tab> <sid>zen_html_tab()
 
+    " Adding logic to catch terminal color - NOTE $TERM_COLOR has to be set
+    " manually
+if $TERM_COLOR == 'light'
+    set background=light
+elseif $TERM_COLOR == 'dark'
+    set background=dark
+endif
+
+
 endif
