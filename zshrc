@@ -49,6 +49,7 @@ alias ga="git add"
 
 alias ZZ="source ~/.zshrc"
 alias vj="nvim ~/Documents/.notes.md"
+alias vn="nvim ~/Documents/.journal.md"
 
 
 

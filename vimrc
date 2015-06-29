@@ -131,7 +131,7 @@ let g:airline_section_z=''
         set autoindent    " align the new line indent with the previous line"
 
         set listchars=tab:→\ ,eol:¬
-    source ~/config/homebrewed_utilities/parse_note.vim
+    source ~/environment/homebrewed_juja/parse_note.vim
     if has('nvim')
         tnoremap <Esc> <C-\><C-n>
 
