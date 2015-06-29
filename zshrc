@@ -312,10 +312,10 @@ function cdnew () {
       then
         echo "No arguments supplied"
     else
-        echo "alias cd$1='cd `pwd`'" >> ~/environment/.cd_alias
+        echo "alias cd$1='cd `pwd`'" >> ~/environment/dotfiles/.cd_alias
     fi
 }
-source ~/environment/.cd_alias
+source ~/environment/dotfiles/.cd_alias
 
 function b_cask_install () {
     brew cask install --appdir=/Applications/ $1 | tee ~/config/ansible/.tee.cask
