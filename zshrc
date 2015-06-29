@@ -307,23 +307,15 @@ function web () {
 cp -i $*[1,-2] /Users/nate_argetsinger/dev/web/startbootstrap-agency/${@[$#]}
 }
 
-function newcd () {
-    if [ $# -eq 0 ]
-      then
-        echo "No arguments supplied"
-    else
-        echo "alias cd$1='cd `pwd`'" >> ~/.cd_alias
-    fi
-}
 function cdnew () {
     if [ $# -eq 0 ]
       then
         echo "No arguments supplied"
     else
-        echo "alias cd$1='cd `pwd`'" >> ~/.cd_alias
+        echo "alias cd$1='cd `pwd`'" >> ~/environment/.cd_alias
     fi
 }
-source ~/.cd_alias
+source ~/environment/.cd_alias
 
 function b_cask_install () {
     brew cask install --appdir=/Applications/ $1 | tee ~/config/ansible/.tee.cask
