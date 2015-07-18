@@ -68,12 +68,13 @@ endfunction "}}}
 "remove trailing whitespace
 cnoreabbrev trailing %s/\s\+$//
 
-nnoremap <F4> O<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
+nnoremap <F4> ggO<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
 endif
 "}}}
 " This level should not be used with IDEs but are necessary on headless nodes"{{{
 
 if (compatability_level >= 1)
+    nnoremap <leader>q :q<cr>
 
 " Disable stupid backup and swap files - they trigger too many events
     " for file system watchers
@@ -179,7 +180,7 @@ nnoremap <c-g> :nohl<cr>
 source ~/config/dotfiles/vimconf_light/vim_local_extras/Bdelete.vim
 
 
-nnoremap <F4> O<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
+nnoremap <F4> ggO<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
 endif
 
 
@@ -569,7 +570,7 @@ vnoremap <Leader>s :sort<CR>
 ""Write and load session (window, info, stuffs)
 map <F2> :mksession! ~/.vim_session <CR>
 map <F3> :source ~/.vim_session <CR>
-nnoremap <F4> O<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
+nnoremap <F4> ggO<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
 
 ""togle for sensible paste functionality.
 set pastetoggle=<F10>

@@ -11,8 +11,8 @@ alias ncaen='narget@login.engin.umich.edu'
 alias wipi='ssh pi@10.0.0.6'
 
     # MODIFYING CONFIG
-    alias cdd='cd ~/config/dotfiles/'
-    alias cda='cd ~/config/ansible/'
+    alias cdd='cd ~/environment/dotfiles/'
+    alias cda='cd ~/environment/ansible/'
 
 
 alias vi='vim -u NONE'
@@ -42,7 +42,7 @@ alias vz="nvim ~/environment/dotfiles/zshrc"
 alias vN='vim ~/.bash_profile'
 alias vB='vim ~/.bashrc'
 alias vV='vim ~/.vimrc'
-alias vv='vim ~/config/dotfiles/vimrc'
+alias vv='vim ~/environment/dotfiles/vimrc'
 alias vT="vim ~/.tmux.conf"
 
 alias ga="git add"
@@ -104,6 +104,8 @@ alias G='grep'
 alias cd..='cd ..'
 alias cd...='cd ../..'
 alias cd....='cd ../../..'
+alias cd.....='cd ../../../..'
+alias cd......='cd ../../../../..'
 
 
 #                FUNCTION
@@ -318,7 +320,7 @@ function cdnew () {
 source ~/environment/dotfiles/.cd_alias
 
 function b_cask_install () {
-    brew cask install --appdir=/Applications/ $1 | tee ~/config/ansible/.tee.cask
+    brew cask install --appdir=/Applications/ $1 | tee ~/environment/ansible/.tee.cask
 }
 
 
@@ -344,7 +346,7 @@ function cc(){
 }
 
 function br_install () {
-brew install $1 | tee ~/config/ansible/.tee.brew
+brew install $1 | tee ~/environment/ansible/.tee.brew
 }
 
 function cd {
@@ -356,13 +358,13 @@ export PGHOST=eecs484.eecs.umich.edu
 export SLIMERJSLAUNCHER=/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Contents/MacOS/firefox
 
 function ralias () {
-    mkdir -p ~/config/dotfiles/.alias_cache
-    echo "alias $1=\"history|tail -n 1|sed 's/\s\s[0-9]*\s\s//'\"" >> ~/config/dotfiles/.alias_cache
+    mkdir -p ~/environment/dotfiles/.alias_cache
+    echo "alias $1=\"history|tail -n 1|sed 's/\s\s[0-9]*\s\s//'\"" >> ~/environment/dotfiles/.alias_cache
 }
 
 function rconf () {
-	touch ~/config/dotfiles/.config_cache
-	echo "`history|tail -n 1|sed 's/\s\s[0-9]*\s\s//'`" >> ~/config/dotfiles/.config_cache
+	touch ~/environment/dotfiles/.config_cache
+	echo "`history|tail -n 1|sed 's/\s\s[0-9]*\s\s//'`" >> ~/environment/dotfiles/.config_cache
 }
 
 function chgrep () {
