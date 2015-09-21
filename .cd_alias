@@ -1,3 +1,5 @@
+alias cdnordic='cd /media/psf/Home/Google_Drive/dev/hardware/IoT/nordic'
+alias cdm='cd /home/parallels/visual_todos'
 alias cdansible='cd $HOME/config/ansible'
 alias cdd='cd $HOME/config/dotfiles'
 alias cdbeftiMac='cd /Volumes/Seagate Backup Plus Drive/Archive/2_23nate_argetsinger'

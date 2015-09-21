@@ -2,6 +2,11 @@ alias va='vim ~/.acc.excess'
 #alias vim="nvim" # neovim for the win
 
 export PATH=/Users/tanedev/Google_Drive/dev/hardware/toolchain/gcc-arm-none-eabi-4_9-2015q1/bin:$PATH:/opt/vertica/bin
+export PATH=$PATH:/Users/tanedev/Google_Drive/bin:/Users/tanedev/ddev/toolchain/gcc-arm-none-eabi-4_9-2015q1/bin
+export PATH=$PATH:/opt/vertica/bin
+export PATH=$PATH:/opt/vertica/bin
+export PATH=$PATH:/media/psf/Home/Google_Drive/dev/toolchain/gcc-arm-none-eabi-4_9-2015q1/bin
+export PATH=$PATH:/opt/vertica/bin:/usr/local/gcc-arm-none-eabi-4_9-2015q1/bin
 
 
 # ALIAS
@@ -402,6 +407,15 @@ if [[ "$unamestr" == 'Linux'  ]]; then
         cp $OUTPUT /media/$USER/MBED
     }
     #ls *.ld|xargs -i cp {} {}.bak
+    echo "yes"
+else
+    echo "not linux"
+fi
+
+echo "included config"
+
+DEFAULT_USER=`whoami`
+=======
 
     function getpath(){
         pwd > $HOME/environment/.getpath
