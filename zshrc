@@ -1,7 +1,7 @@
 alias va='vim ~/.acc.excess'
 #alias vim="nvim" # neovim for the win
 
-export PATH=$PATH:/opt/vertica/bin:/usr/local/gcc-arm-none-eabi-4_9-2015q1/bin
+export PATH=/Users/tanedev/Google_Drive/dev/hardware/toolchain/gcc-arm-none-eabi-4_9-2015q1/bin:$PATH:/opt/vertica/bin
 
 
 # ALIAS
@@ -404,27 +404,44 @@ if [[ "$unamestr" == 'Linux'  ]]; then
     #ls *.ld|xargs -i cp {} {}.bak
 
     function getpath(){
-        pwd|xclip
+        pwd > $HOME/environment/.getpath
     }
     function putpath(){
-        `xclip -o`
+        `cat $HOME/environment/.getpath`
+        #`xclip -o`
     }
-    function gopath(){
-        cd `xclip -o`
-    }
+    #function gopath(){
+        #cd `xclip -o`
+    #}
 
 	export SLIMERJSLAUNCHER=/usr/bin/firefox
     echo "this is ubuntu - sourced according section"
 else
     function getpath(){
-        pwd|pbcopy
+        pwd > $HOME/environment/.getpath
     }
     function putpath(){
-        `pbpaste`
+        `cat $HOME/environment/.getpath`
+        #`xclip -o`
     }
     function gopath(){
-        cd `pbpaste`
+    cd  `cat $HOME/environment/.getpath`
     }
+    #function getpath(){
+        #pwd|pbcopy
+    #}
+    #function putpath(){
+        #`pbpaste`
+    #}
+    #function gopath(){
+        #cd `pbpaste`
+    #}
+
+function sdk6_0_build_and_flash(){
+    nrfjprog --flash $(rm -r _build; make -f $1 |tail -n 1|awk '{print $5}')
+}
+
+
 export SLIMERJSLAUNCHER=/Applications/Firefox.app/Contents/MacOS/firefox
     echo "this is OS X - finished sourcing section"
 fi
@@ -469,3 +486,25 @@ alias gcam='git commit -am'
 export TERM_COLOR="dark"
 alias light="echo -e \"\033]50;SetProfile=Light\a\" && TERM_COLOR=light"
 alias dark="echo -e \"\033]50;SetProfile=Dark\a\" && TERM_COLOR=dark"
+
+alias flash_SD73="nrfjprog --flash-softdevice s110_nrf51822_7.3.0_softdevice.hex"
+
+function flash_here() {
+  nrfjprog --flash _build/*.hex
+}
+
+function deretlif_hide(){
+    hdiutil create -srcfolder /Users/tanedev/deretlif -encryption AES-128 /Users/tanedev/deretlif
+    rm -rf /Users/tanedev/deretlif
+}
+#function deretlif_show(){
+    #hdiutil create -srcfolder /Users/tanedev/deretlif -encryption AES-128 /Users/tanedev/deretlif.img
+#}
+#
+#set -o vi
+#
+export S110="/Users/tanedev/Google_Drive/dev/hardware/IoT/nordic/nrf51822/soft_device/s110_nrf51822_7.3.0/s110_nrf51822_7.3.0_softdevice.hex"
+
+function my_nrfjprog(){
+nrfjprog --erase-all && nrfjprog --flash-softdevice $1 && nrfjprog --flash $1 && nrfjprog --reset
+}
