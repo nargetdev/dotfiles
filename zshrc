@@ -5,6 +5,7 @@ export PATH=$PATH:/Users/tanedev/Google_Drive/bin:/Users/tanedev/ddev/toolchain/
 export PATH=$PATH:/opt/vertica/bin
 export PATH=$PATH:/opt/vertica/bin
 export PATH=$PATH:/media/psf/Home/Google_Drive/dev/toolchain/gcc-arm-none-eabi-4_9-2015q1/bin
+export PATH=$PATH:/opt/vertica/bin:/usr/local/gcc-arm-none-eabi-4_9-2015q1/bin
 
 
 # ALIAS
@@ -14,8 +15,8 @@ alias ncaen='narget@login.engin.umich.edu'
 alias wipi='ssh pi@10.0.0.6'
 
     # MODIFYING CONFIG
-    alias cdd='cd ~/config/dotfiles/'
-    alias cda='cd ~/config/ansible/'
+    alias cdd='cd ~/environment/dotfiles/'
+    alias cda='cd ~/environment/ansible/'
 
 
 alias vi='vim -u NONE'
@@ -41,17 +42,18 @@ alias gs="git status"
 
 # edit a certain file shortcuts
 alias vZ="nvim ~/.zshrc"
-alias vz="nvim ~/config/dotfiles/zshrc"
+alias vz="nvim ~/environment/dotfiles/zshrc"
 alias vN='vim ~/.bash_profile'
 alias vB='vim ~/.bashrc'
 alias vV='vim ~/.vimrc'
-alias vv='vim ~/config/dotfiles/vimrc'
+alias vv='vim ~/environment/dotfiles/vimrc'
 alias vT="vim ~/.tmux.conf"
 
 alias ga="git add"
 
 alias ZZ="source ~/.zshrc"
-alias vj="vim ~/Documents/.notes.md"
+alias vj="nvim ~/Documents/.notes.md"
+alias vn="nvim ~/Documents/.journal.md"
 
 
 
@@ -106,6 +108,8 @@ alias G='grep'
 alias cd..='cd ..'
 alias cd...='cd ../..'
 alias cd....='cd ../../..'
+alias cd.....='cd ../../../..'
+alias cd......='cd ../../../../..'
 
 
 #                FUNCTION
@@ -118,11 +122,17 @@ tma() {
 	tmux attach-session -t $1
 }
 
-backup() {
+backup_hidden() {
 	mkdir -p .bak
 	st=$(date "+%y.%m.%d-%H.%M")
 	for file in $@
 	do cp $file .bak/"$file"_"$st"
+	done
+}
+backup() {
+	st=$(date "+%y.%m.%d-%H.%M")
+	for file in $@
+	do cp $file __"$st"_"$file"
 	done
 }
 #function cmdir(){
@@ -303,26 +313,18 @@ function web () {
 cp -i $*[1,-2] /Users/nate_argetsinger/dev/web/startbootstrap-agency/${@[$#]}
 }
 
-function newcd () {
-    if [ $# -eq 0 ]
-      then
-        echo "No arguments supplied"
-    else
-        echo "alias cd$1='cd `pwd`'" >> ~/.cd_alias
-    fi
-}
 function cdnew () {
     if [ $# -eq 0 ]
       then
         echo "No arguments supplied"
     else
-        echo "alias cd$1='cd `pwd`'" >> ~/.cd_alias
+        echo "alias cd$1='cd `pwd`'" >> ~/environment/dotfiles/.cd_alias
     fi
 }
-source ~/.cd_alias
+source ~/environment/dotfiles/.cd_alias
 
 function b_cask_install () {
-    brew cask install --appdir=/Applications/ $1 | tee ~/config/ansible/.tee.cask
+    brew cask install --appdir=/Applications/ $1 | tee ~/environment/ansible/.tee.cask
 }
 
 
@@ -348,7 +350,7 @@ function cc(){
 }
 
 function br_install () {
-brew install $1 | tee ~/config/ansible/.tee.brew
+brew install $1 | tee ~/environment/ansible/.tee.brew
 }
 
 function cd {
@@ -360,13 +362,13 @@ export PGHOST=eecs484.eecs.umich.edu
 export SLIMERJSLAUNCHER=/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Contents/MacOS/firefox
 
 function ralias () {
-    mkdir -p ~/config/dotfiles/.alias_cache
-    echo "alias $1=\"history|tail -n 1|sed 's/\s\s[0-9]*\s\s//'\"" >> ~/config/dotfiles/.alias_cache
+    mkdir -p ~/environment/dotfiles/.alias_cache
+    echo "alias $1=\"history|tail -n 1|sed 's/\s\s[0-9]*\s\s//'\"" >> ~/environment/dotfiles/.alias_cache
 }
 
 function rconf () {
-	touch ~/config/dotfiles/.config_cache
-	echo "`history|tail -n 1|sed 's/\s\s[0-9]*\s\s//'`" >> ~/config/dotfiles/.config_cache
+	touch ~/environment/dotfiles/.config_cache
+	echo "`history|tail -n 1|sed 's/\s\s[0-9]*\s\s//'`" >> ~/environment/dotfiles/.config_cache
 }
 
 function chgrep () {
@@ -395,6 +397,7 @@ if [[ "$unamestr" == 'Linux'  ]]; then
     function rebuild_nrf(){
         
         #cd $(find . -type d -name "_build")/..
+        NRF51_SDK=/media/psf/Home/Google_Drive/dev/nordic/nRF51_SDK_8.1.0
         make all
         SOFTDEVICE=$NRF51_SDK/components/softdevice/s110/hex/s110_softdevice.hex
         OUTPUT=_build/output.hex
@@ -411,3 +414,71 @@ fi
 echo "included config"
 
 DEFAULT_USER=`whoami`
+=======
+
+    function getpath(){
+        pwd|xclip
+    }
+    function putpath(){
+        `xclip -o`
+    }
+    function gopath(){
+        cd `xclip -o`
+    }
+
+	export SLIMERJSLAUNCHER=/usr/bin/firefox
+    echo "this is ubuntu - sourced according section"
+else
+    function getpath(){
+        pwd|pbcopy
+    }
+    function putpath(){
+        `pbpaste`
+    }
+    function gopath(){
+        cd `pbpaste`
+    }
+export SLIMERJSLAUNCHER=/Applications/Firefox.app/Contents/MacOS/firefox
+    echo "this is OS X - finished sourcing section"
+fi
+
+function begin_install_log() {
+    if [ $# -eq 0 ]
+      then
+        echo "No arguments supplied"
+		HIST_NUM=""
+    else
+		HIST_NUM=$(history|tail -n 1|awk '{ print $1  }')
+		HIST_NUM=$((HIST_NUM + 2))
+		OUTPUT_FILE=$HOME/environment/ansible/.install_cache/${1}
+    fi
+}
+function capture_install_log() {
+if [ ! $HIST_NUM ]
+then
+	echo "run 'begin_install_log' first"
+else
+	history|grep -A999 $HIST_NUM|awk '{$1=""; print $0}' >> $OUTPUT_FILE
+	HIST_NUM=""
+fi
+}
+
+DEFAULT_USER=`whoami`
+
+
+### PATCH - TEMPORARY
+PATH=$PATH:$HOME/Google_Drive/util/slimerjs-0.9.6
+echo "finished sourcing ~/environment/dotfiles/zshrc"
+HISTSIZE=999
+SAVEHIST=999
+
+alias neo='nvim'
+
+#GIT ALIAS
+alias gitnp='git --no-pager'
+alias gcam='git commit -am'
+
+
+export TERM_COLOR="dark"
+alias light="echo -e \"\033]50;SetProfile=Light\a\" && TERM_COLOR=light"
+alias dark="echo -e \"\033]50;SetProfile=Dark\a\" && TERM_COLOR=dark"
