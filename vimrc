@@ -1,72 +1,22 @@
+let $DIR="$HOME/environment/dotfiles"
 "This level of compatability level should work everywhere {{{
+if (!exists("compatability_level"))
+    let compatability_level = 0
+endif
 if (compatability_level >= 0)
 	"echo "adding base line config"
     inoremap jj <esc>
 
- "Cocoa/Emacs style insert mode"{{{
+
+source $DIR/extend/emacs.vim
+
 " If on macvim take advantage of option key as meta.
 " TODO: figure out a way to meta-ize option key on other platforms.
 if has("gui_macvim")
 	set macmeta
 endif
 
-imap <C-b> <Left>
-imap <C-f> <Right>
-imap <C-a> <C-o>:call <SID>home()<CR>
-imap <C-e> <End>
-imap <M-b> <C-o>b
-imap <M-f> <C-o>e<Right>
-imap <C-d> <Del>
-imap <C-h> <BS>
-imap <M-d> <C-o>de
-imap <M-h> <C-w>
-imap <C-k> <C-r>=<SID>kill_line()<CR>
-imap <C-p> <Up>
-imap <C-n> <Down>
 
-" command line mode
-"cmap <C-p> <Up>     "I like the previous command,
-"cmap <C-n> <Down>   "next command funcionality.
-cmap <C-b> <Left>
-cmap <C-f> <Right>
-cmap <C-a> <Home>
-cmap <C-e> <End>
-cmap <M-b> <S-Left>
-cmap <M-f> <S-Right>
-cnoremap <C-d> <Del>
-cnoremap <C-h> <BS>
-cnoremap <M-d> <S-Right><C-w>
-cnoremap <M-h> <C-w>
-cnoremap <C-k> <C-f>D<C-c><C-c>:<Up>
-
-
-function! s:home()
-	let start_col = col('.')
-	normal! ^
-	if col('.') == start_col
-		normal! 0
-	endif
-	return ''
-endfunction
-
-function! s:kill_line()
-	let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
-	if len(text_after_cursor) == 0
-		normal! J
-	else
-		call setline(line('.'), text_before_cursor)
-	endif
-	return ''
-endfunction
-
-function! s:split_line_text_at_cursor()
-	let line_text = getline(line('.'))
-	let text_after_cursor  = line_text[col('.')-1 :]
-	let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
-	return [text_before_cursor, text_after_cursor]
-endfunction "}}}
-"remove trailing whitespace
-cnoreabbrev trailing %s/\s\+$//
 
 nnoremap <F4> :1<cr>O<esc>O---<esc>O<esc>"=strftime("%c")<CR>po<tab>
 
@@ -210,12 +160,13 @@ endif
 """""""""""DUMP"""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""
 if (compatability_level >= 2)
-    source $HOME/environment/homebrewed_mojo/parse_note.vim
+    let $HOMEBREW="$HOME/environment/homebrewed_mojo"
+    source $HOMEBREW/parse_note.vim
     nnoremap <leader>C :!ctags -R .<cr>
     set expandtab
 
     nnoremap <a-l> :w<cr><c-w>laq<cr><Up><cr>
-    function! s:zen_html_tab()
+    function! Zen_html_tab()
         let line = getline('.')
         if match(line, '<.*>') >= 0
             return "\<c-y>n"
@@ -223,7 +174,9 @@ if (compatability_level >= 2)
         return "\<c-y>,"
     endfunction
 
-    autocmd FileType html imap <buffer><expr><tab> <sid>zen_html_tab()
+    autocmd FileType html imap <buffer><expr><tab> Zen_html_tab()
+
+source $DIR/extend/Bclose.vim
 
     " Adding logic to catch terminal color - NOTE $TERM_COLOR has to be set
     " manually
@@ -237,102 +190,19 @@ endif
 map <F1> :mksession! ~/.vim_session <CR>
 map <F2> :source ~/.vim_session <CR>
 
-" Delete buffer while keeping window layout (don't close buffer's windows).
-" Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
-if v:version < 700 || exists('loaded_bclose') || &cp
-  finish
-endif
-let loaded_bclose = 1
-if !exists('bclose_multiple')
-  let bclose_multiple = 1
-endif
-
-" Display an error message.
-function! s:Warn(msg)
-  echohl ErrorMsg
-  echomsg a:msg
-  echohl NONE
-endfunction
-
-" Command ':Bclose' executes ':bd' to delete buffer in current window.
-" The window will show the alternate buffer (Ctrl-^) if it exists,
-" or the previous buffer (:bp), or a blank buffer if no previous.
-" Command ':Bclose!' is the same, but executes ':bd!' (discard changes).
-" An optional argument can specify which buffer to close (name or number).
-function! s:Bclose(bang, buffer)
-  if empty(a:buffer)
-    let btarget = bufnr('%')
-  elseif a:buffer =~ '^\d\+$'
-    let btarget = bufnr(str2nr(a:buffer))
-  else
-    let btarget = bufnr(a:buffer)
-  endif
-  if btarget < 0
-    call s:Warn('No matching buffer for '.a:buffer)
-    return
-  endif
-  if empty(a:bang) && getbufvar(btarget, '&modified')
-    call s:Warn('No write since last change for buffer '.btarget.' (use :Bclose!)')
-    return
-  endif
-  " Numbers of windows that view target buffer which we will delete.
-  let wnums = filter(range(1, winnr('$')), 'winbufnr(v:val) == btarget')
-  if !g:bclose_multiple && len(wnums) > 1
-    call s:Warn('Buffer is in multiple windows (use ":let bclose_multiple=1")')
-    return
-  endif
-  let wcurrent = winnr()
-  for w in wnums
-    execute w.'wincmd w'
-    let prevbuf = bufnr('#')
-    if prevbuf > 0 && buflisted(prevbuf) && prevbuf != w
-      buffer #
-    else
-      bprevious
-    endif
-    if btarget == bufnr('%')
-      " Numbers of listed buffers which are not the target to be deleted.
-      let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val != btarget')
-      " Listed, not target, and not displayed.
-      let bhidden = filter(copy(blisted), 'bufwinnr(v:val) < 0')
-      " Take the first buffer, if any (could be more intelligent).
-      let bjump = (bhidden + blisted + [-1])[0]
-      if bjump > 0
-        execute 'buffer '.bjump
-      else
-        execute 'enew'.a:bang
-      endif
-    endif
-  endfor
-  execute 'bdelete'.a:bang.' '.btarget
-  execute wcurrent.'wincmd w'
-endfunction
-command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
-nnoremap <silent> <Leader>bd :Bclose<CR>
-
 nnoremap <leader>e :wq<cr>
 
 function! Add_recent_screenshot()
-python << EOF
-__author__ = 'tanedev'
-import vim
-
-
-screenshot_path = "/Users/tanedev/digital_assets/screenshots"
-
-
-import os
-import glob
-newest = max(glob.iglob(screenshot_path + '/*'), key=os.path.getctime)
-
-import shutil
-shutil.copy(newest, "/Users/tanedev/environment/.tmp_storage/screenshot_snag")
-
-#vim.command("i" + newest + "<esc>")
-
-print "\n\n" + newest
-
-EOF
+    pyfile $HOMEBREW/add_screenshot.py
 endfunction
+
+function! Parse_date()
+    pyfile $HOME/Google_Drive/dev/web/vis/examples/timeline/vis_timeline.py
+endfunction
+
+nnoremap <leader><c-f><c-f> :call Parse_date()<cr>
+
+" markup util
+inoremap <c-i><c-i> <c-o>:call Add_recent_screenshot()<cr>
 
 endif

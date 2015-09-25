@@ -48,8 +48,8 @@ alias vT="vim ~/.tmux.conf"
 alias ga="git add"
 
 alias ZZ="source ~/.zshrc"
-alias vj="nvim ~/Documents/.notes.md"
-alias vn="nvim ~/Documents/.journal.md"
+alias vj="vim ~/Documents/.notes.md"
+alias vn="vim ~/Documents/.journal.md"
 
 
 
@@ -495,11 +495,10 @@ function flash_here() {
 
 function deretlif_hide(){
     hdiutil create -srcfolder /Users/tanedev/deretlif -encryption AES-128 /Users/tanedev/deretlif
-    rm -rf /Users/tanedev/deretlif
+    #rm -rf /Users/tanedev/deretlif
 }
-#function deretlif_show(){
-    #hdiutil create -srcfolder /Users/tanedev/deretlif -encryption AES-128 /Users/tanedev/deretlif.img
-#}
+function deretlif_show(){
+}
 #
 #set -o vi
 #

@@ -58,3 +58,5 @@ alias cdnordic6='cd /Users/tanedev/Google_Drive/dev/hardware/IoT/nordic/zArchive
 alias cdhrs='cd /Users/tanedev/Google_Drive/dev/hardware/IoT/nordic/zArchive/nrf51_sdk_v6_0_0_43681/nrf51822/Board/nrf6310/s110/ble_app_hrs/gcc'
 alias cd945='cd /Users/tanedev/Desktop/495'
 alias cd495='cd /Users/tanedev/Desktop/495'
+alias cd388='cd /Users/tanedev/Desktop/388'
+alias cd388lec='cd /Users/tanedev/Desktop/388/lectures'
