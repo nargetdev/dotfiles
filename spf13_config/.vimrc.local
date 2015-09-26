@@ -1,0 +1,3 @@
+let compatability_level = 2
+echom "sourcing my dotfile dir with compat: ".compatability_level
+source ~/environment/dotfiles/vimrc

@@ -40,6 +40,6 @@ else
 endif
 endfunction
 
-nnoremap gf :call Gf_patch()<cr>
+nnoremap gf :call Gf_patch('')<cr>
 
 nnoremap <2-LeftMouse> :call Gf_patch('')<cr>

@@ -205,4 +205,8 @@ nnoremap <leader><c-f><c-f> :call Parse_date()<cr>
 " markup util
 inoremap <c-i><c-i> <c-o>:call Add_recent_screenshot()<cr>
 
+
+cnoreabbrev SWTC SWTC /Users/tanedev/environment/dotfiles/fun/SWTC.vim/intro.swtc
+
+
 endif
