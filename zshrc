@@ -1,7 +1,13 @@
+dotfile_location=/Users/tanedev/environment/dotfiles
+
+source $dotfile_location/.backup_directives
+
 alias va='vim ~/.acc.excess'
 #alias vim="nvim" # neovim for the win
 
 export PATH=/Users/tanedev/Google_Drive/dev/hardware/toolchain/gcc-arm-none-eabi-4_9-2015q1/bin:$PATH:/opt/vertica/bin
+export PATH=$PATH:/opt/local/bin
+export PATH=/usr/lib/qt4/bin:$PATH
 
 
 # ALIAS
@@ -128,7 +134,10 @@ backup_hidden() {
 backup() {
 	st=$(date "+%y.%m.%d-%H.%M")
 	for file in $@
-	do cp $file __"$st"_"$file"
+    do
+        backupDir=`dirname $file`/.backup
+        mkdir -p "$backupDir"
+	    cp -r $file "$backupDir"/__"$st"_"`basename $file`"
 	done
 }
 #function cmdir(){
@@ -314,7 +323,7 @@ function cdnew () {
       then
         echo "No arguments supplied"
     else
-        echo "alias cd$1='cd `pwd`'" >> ~/environment/dotfiles/.cd_alias
+        echo "alias cd$1='cd \"`pwd`\"'" >> ~/environment/dotfiles/.cd_alias
     fi
 }
 source ~/environment/dotfiles/.cd_alias
@@ -328,12 +337,12 @@ function updatecdm () {
 echo "alias cdm='cd `pwd`'" >> ~/.cd_alias
 }
 
-function newalias () {
+function newAlias () {
 	echo "Handle?"
 	read handle
 	echo "Command?"
 	read cmd
-	echo "alias $handle='$cmd'">>~/.zshrc
+	echo "alias $handle='$cmd'">>~/environment/dotfiles/.newAlias
 }
 
 function addapp(){
@@ -404,7 +413,7 @@ if [[ "$unamestr" == 'Linux'  ]]; then
     #ls *.ld|xargs -i cp {} {}.bak
 
     function getpath(){
-        pwd > $HOME/environment/.getpath
+        echo \"`pwd`\" > $HOME/environment/.getpath
     }
     function putpath(){
         `cat $HOME/environment/.getpath`
@@ -418,14 +427,14 @@ if [[ "$unamestr" == 'Linux'  ]]; then
     echo "this is ubuntu - sourced according section"
 else
     function getpath(){
-        pwd > $HOME/environment/.getpath
+        echo \"`pwd`\" > $HOME/environment/.getpath
     }
     function putpath(){
-        `cat $HOME/environment/.getpath`
+        cd `cat $HOME/environment/.getpath`
         #`xclip -o`
     }
     function gopath(){
-    cd  `cat $HOME/environment/.getpath`
+        cd  "`cat $HOME/environment/.getpath`"
     }
     #function getpath(){
         #pwd|pbcopy
@@ -476,7 +485,6 @@ echo "finished sourcing ~/environment/dotfiles/zshrc"
 HISTSIZE=999
 SAVEHIST=999
 
-alias neo='nvim'
 
 #GIT ALIAS
 alias gitnp='git --no-pager'
@@ -507,3 +515,13 @@ export S110="/Users/tanedev/Google_Drive/dev/hardware/IoT/nordic/nrf51822/soft_d
 function my_nrfjprog(){
 nrfjprog --erase-all && nrfjprog --flash-softdevice $1 && nrfjprog --flash $1 && nrfjprog --reset
 }
+
+#alias gitnp="git --no-pager"
+
+function message_date(){
+gdate -ud "2001-01-01 + `pbpaste` seconds"
+}
+
+alias nrsync="rsync -avh --progress --append"
+
+alias getBathroom='curl "https://bathroomlogger.firebaseio.com/bathroom_activity.json" | jq ".[].utc"|xargs -n 1 date -r'

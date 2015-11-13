@@ -165,7 +165,7 @@ if (compatability_level >= 2)
     nnoremap <leader>C :!ctags -R .<cr>
     set expandtab
 
-    nnoremap <a-l> :w<cr><c-w>laq<cr><Up><cr>
+    nnoremap <a-l> :w<cr><c-w>la<Up><cr>
     function! Zen_html_tab()
         let line = getline('.')
         if match(line, '<.*>') >= 0
