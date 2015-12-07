@@ -1,0 +1,103 @@
+
+# ALIAS
+#
+alias pissh='ssh pi@10.0.0.9'
+alias ncaen='narget@login.engin.umich.edu'
+alias wipi='ssh pi@10.0.0.6'
+
+    # MODIFYING CONFIG
+    alias cdd='cd ~/environment/dotfiles/'
+    alias cda='cd ~/environment/ansible/'
+
+
+alias v='vim -u NONE'
+
+#
+alias cda='cd /Users/nateargetsinger/Dropbox/sActive\ Projects/REVAMP_webProf'
+alias cdv='cd ~/.vim'
+alias hgrep="history|grep "
+alias webify="ssh nargetde@nargetdev.com git pull"
+alias orange='ssh nargetde@nargetdev.com'
+
+# git stuff (Note: be carefull of compatability with oh-my-zsh git plugin)
+alias gpu="git push"
+alias gcomm="git commit -m"
+#gcomm() {
+	##echo "$1"
+	#git commit -m "$1"
+#}
+alias gco='git checkout'
+alias ls..='ls ..'
+alias cd..='cd ..'
+alias gs="git status"
+
+# edit a certain file shortcuts
+alias vZ="nvim ~/.zshrc"
+alias vz="nvim ~/environment/dotfiles/zshrc"
+alias vN='vim ~/.bash_profile'
+alias vB='vim ~/.bashrc'
+alias vV='vim ~/.vimrc'
+alias vv='vim ~/environment/dotfiles/vimrc'
+alias vT="vim ~/.tmux.conf"
+
+alias ga="git add"
+
+alias ZZ="source ~/.zshrc"
+alias vj="vim ~/Documents/.notes.md"
+alias vn="vim ~/Documents/.journal.md"
+
+
+
+alias cdc='cd /Users/nateargetsinger/dev/Codazen/codazenFrontEnd/simple-server'
+alias CCC='make clean && make release && ./base < in.txt -m FASTTSP'
+alias testbase='make clean && make release && make inMST'
+
+# cd shortcuts
+#alias cdm='cd /Users/nateargetsinger/dev/webDev/REVAMP_webProf'
+
+alias cdv='cd ~/.vim/bundle'
+
+
+#alias ls='ls -G'
+alias tls='tmux ls'
+alias tmux='tmux -2'
+
+
+# resource from ~/.bashrc so you dont have to logout and log back in
+alias BB='source ~/.bashrc'
+
+
+alias vp='vim *.h *.cpp'
+alias v='nvim -u NONE'
+
+#NOTE: this won't work for you cause you aint me.
+alias autocaen='osascript /Users/nateargetsinger/Dev/OSAS/acaen.scpt'
+alias auto='autocaen &'
+alias caen='ssh narget@login.engin.umich.edu'
+
+alias play='afplay -q 1'
+
+alias mnt='sshfs narget@login.engin.umich.edu:e ~/rsync/e'
+alias xmnt='diskutil unmount /Users/nateargetsinger/rsync/e'
+alias mypath="echo $PATH"
+alias howbig='du -hs'
+
+
+alias tkill="tmux kill-server"
+
+alias lsa='ls -a'
+alias edz='ed ~/.zshrc'
+alias cdm='cd /Users/nateargetsinger/485/pa3_8tdyc1h5mi'
+alias vadobe='vim ~/.notes.adobe.crit'
+
+alias show='defaults write com.apple.finder AppleShowAllFiles YES;
+killall Finder /System/Library/CoreServices/Finder.app'
+alias hide='defaults write com.apple.finder AppleShowAllFiles NO;
+killall Finder /System/Library/CoreServices/Finder.app'
+
+alias G='grep'
+alias cd..='cd ..'
+alias cd...='cd ../..'
+alias cd....='cd ../../..'
+alias cd.....='cd ../../../..'
+alias cd......='cd ../../../../..'

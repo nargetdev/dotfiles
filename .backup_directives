@@ -1,0 +1,1 @@
+alias backup_drive="rsync -av --progress ~/Google\ Drive ~/.local_googledrive.bak"
