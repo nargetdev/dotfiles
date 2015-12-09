@@ -1,10 +1,10 @@
+editor=nvim
 alias publish='ssh -v -f nargetde@nargetdev.com "cd public_html && git pull &> /dev/null" 2> ~/tmp/ssh.err'
 
 dotfile_location=/Users/tanedev/environment/dotfiles
 
 source $dotfile_location/.backup_directives
 
-alias va='vim ~/.acc.excess'
 #alias vim="nvim" # neovim for the win
 
 export PATH=/Users/tanedev/Google_Drive/dev/hardware/toolchain/gcc-arm-none-eabi-4_9-2015q1/bin:$PATH:/opt/vertica/bin

@@ -1,4 +1,6 @@
 let $DIR="$HOME/environment/dotfiles"
+
+"DUMPY
 "This level of compatability level should work everywhere {{{
 if (!exists("compatability_level"))
     let compatability_level = 0
@@ -209,4 +211,5 @@ inoremap <c-i><c-i> <c-o>:call Add_recent_screenshot()<cr>
 cnoreabbrev SWTC SWTC /Users/tanedev/environment/dotfiles/fun/SWTC.vim/intro.swtc
 
 
+iunmap <tab><tab>
 endif
