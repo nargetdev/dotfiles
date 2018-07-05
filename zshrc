@@ -415,7 +415,6 @@ fi
 echo "included config"
 
 DEFAULT_USER=`whoami`
-=======
 
     function getpath(){
         pwd > $HOME/environment/.getpath
