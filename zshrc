@@ -416,48 +416,42 @@ echo "included config"
 
 DEFAULT_USER=`whoami`
 
-    function getpath(){
-        pwd > $HOME/environment/.getpath
-    }
-    function putpath(){
-        `cat $HOME/environment/.getpath`
-        #`xclip -o`
-    }
-    #function gopath(){
-        #cd `xclip -o`
-    #}
+function getpath(){
+	pwd > $HOME/environment/.getpath
+}
+function putpath(){
+	`cat $HOME/environment/.getpath`
+	#`xclip -o`
+}
+#function gopath(){
+#cd `xclip -o`
+#}
 
-	export SLIMERJSLAUNCHER=/usr/bin/firefox
-    echo "this is ubuntu - sourced according section"
-else
-    function getpath(){
-        pwd > $HOME/environment/.getpath
-    }
-    function putpath(){
-        `cat $HOME/environment/.getpath`
-        #`xclip -o`
-    }
-    function gopath(){
-    cd  `cat $HOME/environment/.getpath`
-    }
-    #function getpath(){
-        #pwd|pbcopy
-    #}
-    #function putpath(){
-        #`pbpaste`
-    #}
-    #function gopath(){
-        #cd `pbpaste`
-    #}
+echo "this is ubuntu - sourced according section"
+function getpath(){
+	pwd > $HOME/environment/.getpath
+}
+function putpath(){
+	`cat $HOME/environment/.getpath`
+	#`xclip -o`
+}
+function gopath(){
+	cd  `cat $HOME/environment/.getpath`
+}
+#function getpath(){
+#pwd|pbcopy
+#}
+#function putpath(){
+#`pbpaste`
+#}
+#function gopath(){
+#cd `pbpaste`
+#}
 
 function sdk6_0_build_and_flash(){
     nrfjprog --flash $(rm -r _build; make -f $1 |tail -n 1|awk '{print $5}')
 }
 
-
-export SLIMERJSLAUNCHER=/Applications/Firefox.app/Contents/MacOS/firefox
-    echo "this is OS X - finished sourcing section"
-fi
 
 function begin_install_log() {
     if [ $# -eq 0 ]
@@ -470,6 +464,7 @@ function begin_install_log() {
 		OUTPUT_FILE=$HOME/environment/ansible/.install_cache/${1}
     fi
 }
+
 function capture_install_log() {
 if [ ! $HIST_NUM ]
 then
