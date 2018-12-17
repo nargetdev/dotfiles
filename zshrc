@@ -319,7 +319,7 @@ function cdnew () {
       then
         echo "No arguments supplied"
     else
-        echo "alias cd$1='cd `pwd`'" >> ~/environment/dotfiles/.cd_alias
+        echo "alias cd$1='cd \"`pwd`\"'" >> ~/environment/dotfiles/.cd_alias
     fi
 }
 source ~/environment/dotfiles/.cd_alias
@@ -479,7 +479,7 @@ DEFAULT_USER=`whoami`
 
 
 ### PATCH - TEMPORARY
-PATH=$PATH:$HOME/Google_Drive/util/slimerjs-0.9.6
+#PATH=$PATH:$HOME/Google_Drive/util/slimerjs-0.9.6
 echo "finished sourcing ~/environment/dotfiles/zshrc"
 HISTSIZE=999
 SAVEHIST=999
@@ -515,4 +515,12 @@ export S110="/Users/tanedev/Google_Drive/dev/hardware/IoT/nordic/nrf51822/soft_d
 
 function my_nrfjprog(){
 nrfjprog --erase-all && nrfjprog --flash-softdevice $1 && nrfjprog --flash $1 && nrfjprog --reset
+}
+
+function modfunc(){
+nvim `type $1|awk '{print $3}'`
+}
+
+function knowhost(){
+awk "NR != ${1}" ~/.ssh/known_hosts > ~/.ssh/known_hosts
 }
