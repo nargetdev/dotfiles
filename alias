@@ -1,0 +1,2 @@
+EDITOR=nvim
+alias vZ="$EDITOR $HOME/.zshrc"

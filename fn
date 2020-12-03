@@ -1,0 +1,17 @@
+function clonemy {
+	if [ $# -ne 2 ]; then
+		echo "not two args";
+	else
+		git clone git@github.com:nargetdev/$1 $2;
+	fi
+}
+
+CD_ALIAS_PATH=$HOME/.dotfiles/.cd_alias
+function cdnew () {
+	if [ $# -eq 0 ]; then
+		echo "No arguments supplied";
+	else
+		echo "alias cd$1='cd \"`pwd`\"'" >> $CD_ALIAS_PATH;
+	fi
+}
+source $CD_ALIAS_PATH
