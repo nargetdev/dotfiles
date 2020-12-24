@@ -1,6 +1,10 @@
 export DOTFILES_DIR=~/.dotfiles
 export ANSIBLE_DIR=~/.ansible
 
+THIS_FILE=$DOTFILES_DIR/zshrc
+
+echo "INCLUDE $THIS_FILE"
+
 alias vim="nvim" # neovim for the win
 
 # MODIFYING CONFIG
@@ -139,7 +143,6 @@ brew install $1 | tee $ANSIBLE_DIR/.tee.brew
 #}
 
 
-echo "included config"
 
 DEFAULT_USER=`whoami`
 
@@ -190,7 +193,7 @@ fi
 DEFAULT_USER=`whoami`
 
 
-echo "finished sourcing ~/environment/dotfiles/zshrc"
+echo "finished sourcing $DOTFILES_DIR/zshrc"
 HISTSIZE=999
 SAVEHIST=999
 
