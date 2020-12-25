@@ -5,6 +5,12 @@ THIS_FILE=$DOTFILES_DIR/zshrc
 
 echo "INCLUDE $THIS_FILE"
 
+#########################################
+# Top level modules
+source $DOTFILES_DIR/PATH
+
+# END Top level modules
+#########################################
 alias vim="nvim" # neovim for the win
 
 # MODIFYING CONFIG
@@ -122,6 +128,7 @@ function cdnew () {
     fi
 }
 source $DOTFILES_DIR/.cd_alias
+alias vicda="vi $DOTFILES_DIR/.cd_alias"
 
 
 function newalias () {
